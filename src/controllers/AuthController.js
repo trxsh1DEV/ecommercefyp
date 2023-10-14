@@ -5,18 +5,17 @@ class AuthController {
   // Register
   async register(req, res) {
     const newUser = new UserModel(req.body);
-    // const { email: mail } = newUser;
 
     try {
       const savedUser = await newUser.save();
-      const { username, email } = savedUser;
-      return res.status(201).json({ username, email });
+      const { username, email, id } = savedUser;
+      return res.status(201).json({ username, email, id });
     } catch (err) {
       let removeContent = err.message.indexOf(':');
 
-      if (removeContent !== -1) {
-        removeContent = err.message.substring(removeContent + 1).trim().split(', ');
-      }
+      removeContent !== -1
+        ? removeContent = err.message.substring(removeContent + 1).trim().split(', ')
+        : removeContent = err.message.split(', ');
 
       return res.status(400).json({
         errors: removeContent.map((e) => {
@@ -53,11 +52,9 @@ class AuthController {
     } catch (err) {
       let removeContent = err.message.indexOf(':');
 
-      if (removeContent !== -1) {
-        removeContent = err.message.substring(removeContent + 1).trim().split(', ');
-      } else {
-        removeContent = err.message.slice(24).split(', ');
-      }
+      removeContent !== -1
+        ? removeContent = err.message.substring(removeContent + 1).trim().split(', ')
+        : removeContent = err.message.split(', ');
 
       return res.status(400).json({
         errors: removeContent.map((e) => e),

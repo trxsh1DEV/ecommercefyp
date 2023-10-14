@@ -14,7 +14,7 @@ class UserController {
         : await UserModel.find({}, 'username email id');
       return res.status(200).json(users);
     } catch (err) {
-      return res.status(500).json({ errors: ['Tivemos um problema interno'] });
+      return res.status(500).json({ errors: ['Tivemos um problema interno', err.message.split(', ')] });
     }
   }
 
@@ -24,38 +24,36 @@ class UserController {
       if (!user) {
         return res.status(400).json('Usuario não encontrado');
       }
-      const { email, username, isAdmin } = user;
+      const {
+        email, username, isAdmin, id,
+      } = user;
 
-      return res.status(200).json({ username, email, isAdmin });
+      return res.status(200).json({
+        username, email, isAdmin, id,
+      });
     } catch (err) {
       return res.status(401).json({
-        errors: ['ID inválido'],
+        errors: ['ID inválido', err.message.split(', ')],
       });
     }
   }
 
   async update(req, res) {
     try {
-      // const { id } = req.params;
-      // if (!id || !isValidObjectId(id)) {
-      //   return res.status(400).json({ errors: ['ID inválido'] });
-      // }
-
       const user = await UserModel.findByIdAndUpdate(req.userId, req.body, { new: true });
 
       if (!user) {
         return res.status(400).json({ errors: ['Usuário não encontrado'] });
       }
 
-      const { email, username } = user;
+      const { email, username, id } = user;
 
-      return res.status(200).json({ username, email });
+      return res.status(200).json({ username, email, id });
     } catch (err) {
       let removeContent = err.message.indexOf(':');
-
-      if (removeContent !== -1) {
-        removeContent = err.message.substring(removeContent + 1).trim().split(', ');
-      }
+      removeContent !== -1
+        ? removeContent = err.message.substring(removeContent + 1).trim().split(', ')
+        : removeContent = err.message.split(', ');
 
       return res.status(400).json({
         errors: removeContent.map((e) => {
@@ -72,11 +70,6 @@ class UserController {
 
   async delete(req, res) {
     try {
-      // const { id } = req.params;
-      // if (!id || !isValidObjectId(id)) {
-      //   return res.status(400).json({ errors: ['ID inválido'] });
-      // }
-
       const user = await UserModel.findOneAndDelete({ _id: req.userId });
 
       if (!user) {
@@ -86,10 +79,9 @@ class UserController {
       return res.status(200).json(`Usuário '${user.username}' foi deletado com sucesso`);
     } catch (err) {
       let removeContent = err.message.indexOf(':');
-
-      if (removeContent !== -1) {
-        removeContent = err.message.substring(removeContent + 1).trim().split(', ');
-      }
+      removeContent !== -1
+        ? removeContent = err.message.substring(removeContent + 1).trim().split(', ')
+        : removeContent = err.message.split(', ');
 
       return res.status(400).json({
         errors: removeContent.map((e) => e),
@@ -123,7 +115,7 @@ class UserController {
       })));
     } catch (err) {
       return res.status(500).json({
-        errors: ['Erro interno'],
+        errors: ['Erro interno', err.message.split(', ')],
       });
     }
   }
