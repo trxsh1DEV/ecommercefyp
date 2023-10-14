@@ -17,7 +17,7 @@ class OrderModel {
       ],
       amount: { type: Number, required: true },
       address: { type: Object, required: true },
-      status: { type: String, status: 'pending' },
+      status: { type: String, default: 'pending' },
     }, { timestamps: true });
 
     this.OrderModel = mongoose.model('Order', this.OrderSchema);

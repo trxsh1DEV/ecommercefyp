@@ -1,7 +1,7 @@
 import { isValidObjectId } from 'mongoose';
 import Product from '../models/Product';
 
-class HomeController {
+class ProductController {
   async index(req, res) {
     const qNew = req.query.new;
     const qCategory = req.query.category;
@@ -81,7 +81,7 @@ class HomeController {
       return res.status(400).json({ errors: ['ID inválido'] });
     }
     try {
-      const removeProduct = await Product.findByIdAndDelete(id, req.body, { new: true });
+      const removeProduct = await Product.findByIdAndDelete(id);
 
       if (!removeProduct) {
         return res.status(400).json({ errors: ['Produto não encontrado'] });
@@ -118,4 +118,4 @@ class HomeController {
   }
 }
 
-export default new HomeController();
+export default new ProductController();

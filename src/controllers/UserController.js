@@ -115,7 +115,7 @@ class UserController {
       })));
     } catch (err) {
       return res.status(500).json({
-        errors: ['Erro interno', err.message.split(', ')],
+        errors: ['Falha ao tentar obter estatísticas de usuários', err.message.split(', ')],
       });
     }
   }
