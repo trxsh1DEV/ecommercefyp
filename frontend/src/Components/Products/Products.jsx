@@ -3,7 +3,7 @@ import Product from '../Product/Product';
 import { Container } from './styles';
 import P from 'prop-types';
 import axios from 'axios';
-import { config } from '../../utils/token';
+import { config } from '../../utils/requestMethods';
 
 const Products = ({ category, filters, sort }) => {
   const [products, setProducts] = useState([]);
