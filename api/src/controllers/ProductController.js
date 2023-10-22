@@ -17,13 +17,16 @@ class ProductController {
         query = query.where('categories').in([qCategory]);
       }
 
-      query = query.select('code title description srcImg categories color price');
+      // query = query.select(
+      //   'code title description srcImg categories size color price',
+      // );
       const products = await query.exec();
-      console.log(products);
 
       return res.status(200).json(products);
     } catch (err) {
-      return res.status(500).json({ errors: ['Falha ao buscar produtos', err.message.split(', ')] });
+      return res.status(500).json({
+        errors: ['Falha ao buscar produtos', err.message.split(', ')],
+      });
     }
   }
 
@@ -37,8 +40,11 @@ class ProductController {
       let removeContent = err.message.indexOf(':');
 
       removeContent !== -1
-        ? removeContent = err.message.substring(removeContent + 1).trim().split(', ')
-        : removeContent = err.message.split(', ');
+        ? (removeContent = err.message
+            .substring(removeContent + 1)
+            .trim()
+            .split(', '))
+        : (removeContent = err.message.split(', '));
 
       return res.status(500).json({
         errors: removeContent.map((e) => e),
@@ -52,22 +58,25 @@ class ProductController {
       if (!id || !isValidObjectId(id)) {
         return res.status(400).json({ errors: ['ID inválido'] });
       }
-      const updateProduct = await Product.findByIdAndUpdate(id, req.body, { new: true });
+      const updateProduct = await Product.findByIdAndUpdate(id, req.body, {
+        new: true,
+      });
 
       if (!updateProduct) {
         return res.status(400).json({ errors: ['Produto não encontrado'] });
       }
 
-      const {
-        _id, createdAt, updatedAt, __v, ...product
-      } = updateProduct._doc;
+      const { _id, createdAt, updatedAt, __v, ...product } = updateProduct._doc;
 
       return res.status(201).json(product);
     } catch (err) {
       let removeContent = err.message.indexOf(':');
       removeContent !== -1
-        ? removeContent = err.message.substring(removeContent + 1).trim().split(', ')
-        : removeContent = err.message.split(', ');
+        ? (removeContent = err.message
+            .substring(removeContent + 1)
+            .trim()
+            .split(', '))
+        : (removeContent = err.message.split(', '));
 
       return res.status(400).json({
         errors: removeContent.map((e) => e),
@@ -89,7 +98,9 @@ class ProductController {
 
       const { title, _id } = removeProduct;
 
-      return res.status(201).json(`O produto '${title}' foi removido com sucesso, ID: ${_id}`);
+      return res
+        .status(201)
+        .json(`O produto '${title}' foi removido com sucesso, ID: ${_id}`);
     } catch (err) {
       return res.status(500).json({
         errors: ['Falha ao tentar remover produto', err.message.split(', ')],

@@ -5,6 +5,8 @@ import tokenRoutes from './src/routes/token';
 import productRoutes from './src/routes/product';
 import cartRoutes from './src/routes/cart';
 import orderRoutes from './src/routes/order';
+import stripe from './src/routes/stripe';
+import cors from 'cors';
 
 class App {
   constructor() {
@@ -14,6 +16,7 @@ class App {
   }
 
   middlewares() {
+    this.app.use(cors());
     this.app.use(express.urlencoded({ extended: true }));
     this.app.use(express.json());
   }
@@ -25,6 +28,7 @@ class App {
     this.app.use('/api/products/', productRoutes);
     this.app.use('/api/carts/', cartRoutes);
     this.app.use('/api/orders/', orderRoutes);
+    this.app.use('/api/create-checkout-session', stripe);
   }
 }
 

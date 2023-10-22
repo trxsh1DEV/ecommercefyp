@@ -14,8 +14,11 @@ class AuthController {
       let removeContent = err.message.indexOf(':');
 
       removeContent !== -1
-        ? removeContent = err.message.substring(removeContent + 1).trim().split(', ')
-        : removeContent = err.message.split(', ');
+        ? (removeContent = err.message
+            .substring(removeContent + 1)
+            .trim()
+            .split(', '))
+        : (removeContent = err.message.split(', '));
 
       return res.status(400).json({
         errors: removeContent.map((e) => {
@@ -53,8 +56,11 @@ class AuthController {
       let removeContent = err.message.indexOf(':');
 
       removeContent !== -1
-        ? removeContent = err.message.substring(removeContent + 1).trim().split(', ')
-        : removeContent = err.message.split(', ');
+        ? (removeContent = err.message
+            .substring(removeContent + 1)
+            .trim()
+            .split(', '))
+        : (removeContent = err.message.split(', '));
 
       return res.status(400).json({
         errors: removeContent.map((e) => e),

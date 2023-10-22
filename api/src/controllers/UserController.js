@@ -7,14 +7,19 @@ class UserController {
     try {
       console.log(req.userIsAdmin);
       if (!req.userIsAdmin) {
-        return res.status(401).json({ errors: ['Você não tem esse nivel de acesso'] });
+        return res
+          .status(401)
+          .json({ errors: ['Você não tem esse nivel de acesso'] });
       }
 
-      const users = query ? await UserModel.find().sort({ _id: -1 }).limit(10)
+      const users = query
+        ? await UserModel.find().sort({ _id: -1 }).limit(10)
         : await UserModel.find({}, 'username email id');
       return res.status(200).json(users);
     } catch (err) {
-      return res.status(500).json({ errors: ['Tivemos um problema interno', err.message.split(', ')] });
+      return res.status(500).json({
+        errors: ['Tivemos um problema interno', err.message.split(', ')],
+      });
     }
   }
 
@@ -24,12 +29,13 @@ class UserController {
       if (!user) {
         return res.status(400).json('Usuario não encontrado');
       }
-      const {
-        email, username, isAdmin, id,
-      } = user;
+      const { email, username, isAdmin, id } = user;
 
       return res.status(200).json({
-        username, email, isAdmin, id,
+        username,
+        email,
+        isAdmin,
+        id,
       });
     } catch (err) {
       return res.status(401).json({
@@ -40,7 +46,9 @@ class UserController {
 
   async update(req, res) {
     try {
-      const user = await UserModel.findByIdAndUpdate(req.userId, req.body, { new: true });
+      const user = await UserModel.findByIdAndUpdate(req.userId, req.body, {
+        new: true,
+      });
 
       if (!user) {
         return res.status(400).json({ errors: ['Usuário não encontrado'] });
@@ -52,8 +60,11 @@ class UserController {
     } catch (err) {
       let removeContent = err.message.indexOf(':');
       removeContent !== -1
-        ? removeContent = err.message.substring(removeContent + 1).trim().split(', ')
-        : removeContent = err.message.split(', ');
+        ? (removeContent = err.message
+            .substring(removeContent + 1)
+            .trim()
+            .split(', '))
+        : (removeContent = err.message.split(', '));
 
       return res.status(400).json({
         errors: removeContent.map((e) => {
@@ -76,12 +87,17 @@ class UserController {
         return res.status(400).json({ errors: ['Usuário não encontrado'] });
       }
 
-      return res.status(200).json(`Usuário '${user.username}' foi deletado com sucesso`);
+      return res
+        .status(200)
+        .json(`Usuário '${user.username}' foi deletado com sucesso`);
     } catch (err) {
       let removeContent = err.message.indexOf(':');
       removeContent !== -1
-        ? removeContent = err.message.substring(removeContent + 1).trim().split(', ')
-        : removeContent = err.message.split(', ');
+        ? (removeContent = err.message
+            .substring(removeContent + 1)
+            .trim()
+            .split(', '))
+        : (removeContent = err.message.split(', '));
 
       return res.status(400).json({
         errors: removeContent.map((e) => e),
@@ -109,13 +125,18 @@ class UserController {
         },
       ]);
 
-      return res.status(200).json(data.map((item) => ({
-        mes: item._id, // Renomeia _id para mes
-        total: item.total, // Mantém o campo total
-      })));
+      return res.status(200).json(
+        data.map((item) => ({
+          mes: item._id, // Renomeia _id para mes
+          total: item.total, // Mantém o campo total
+        })),
+      );
     } catch (err) {
       return res.status(500).json({
-        errors: ['Falha ao tentar obter estatísticas de usuários', err.message.split(', ')],
+        errors: [
+          'Falha ao tentar obter estatísticas de usuários',
+          err.message.split(', '),
+        ],
       });
     }
   }
