@@ -8,6 +8,8 @@ import ProductList from './pages/ProductList/ProductList';
 import Product from './pages/Product/Product';
 import Cart from './pages/Cart/Cart';
 import { Login, Register } from './pages/Login/Login';
+import CheckoutSuccess from './Components/Payments/CheckoutSuccess';
+import NotFound from './pages/NotFound/NotFound';
 
 const App = () => {
   const user = false; // Defina sua lógica de autenticação aqui
@@ -20,6 +22,7 @@ const App = () => {
           <Route path="/product/:id" element={<Product />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/success" />
+          <Route path="/checkout-success" element={<CheckoutSuccess />} />
           <Route
             path="/login"
             element={user ? <Navigate to="/" /> : <Login />}
@@ -28,6 +31,7 @@ const App = () => {
             path="/register"
             element={user ? <Navigate to="/" /> : <Register />}
           />
+          <Route path="*" element={<NotFound />} />
         </Routes>
         <GlobalStyles />
       </ThemeProvider>

@@ -1,6 +1,5 @@
 import {
   Bottom,
-  Button,
   Container,
   Details,
   Hr,
@@ -33,19 +32,11 @@ import Navbar from '../../Components/Navbar/Navbar';
 import { Announcement } from '../../Components/Announcement/Announcement';
 import { Add, Remove } from '@mui/icons-material';
 import { useSelector } from 'react-redux';
-import StripeCheckout from 'react-stripe-checkout';
-import { useState } from 'react';
-
-const KEY = import.meta.env.VITE_REACT_APP_STRIPE;
+import PayButton from '../../Components/Payments/PayButton';
 
 const Cart = () => {
   const cart = useSelector((state) => state.cart);
-  const [stripeToken, setStripeToken] = useState(null);
 
-  const onToken = (token) => {
-    setStripeToken(token);
-  };
-  console.log(stripeToken);
   return (
     <Container>
       <Navbar />
@@ -109,21 +100,7 @@ const Cart = () => {
               <SummaryItemText>Total</SummaryItemText>
               <SummaryItemPrice>$ {cart.total}</SummaryItemPrice>
             </SummaryItem>
-            <StripeCheckout
-              name="FYP Store"
-              image="https://avatars.githubusercontent.com/u/1486366?v=4"
-              email="true"
-              zipCode
-              billingAddress
-              shippingAddress
-              description={`Your total is $${cart.total}`}
-              amount={cart.total * 100}
-              panelLabel="Confirmar pagamento"
-              token={onToken}
-              stripeKey={KEY}
-            >
-              <Button>CHECKOUT NOW</Button>
-            </StripeCheckout>
+            <PayButton cartItens={cart} />
           </Summary>
         </Bottom>
       </Wrapper>
