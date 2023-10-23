@@ -4,8 +4,8 @@ import tokenAndAdmin from '../middlewares/tokenAndAdmin';
 
 const router = new Router();
 
-router.get('/', tokenAndAdmin, ProductController.index);
-router.get('/:id', tokenAndAdmin, ProductController.show);
+router.get('/', ProductController.index);
+router.get('/:id', ProductController.show);
 
 router.post('/', tokenAndAdmin, ProductController.store);
 router.put('/:id', tokenAndAdmin, ProductController.update);

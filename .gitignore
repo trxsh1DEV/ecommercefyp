@@ -1,7 +1,0 @@
-node_modules
-*.txt
-.env
-*.jpg
-*.png
-*.svg
-uploads

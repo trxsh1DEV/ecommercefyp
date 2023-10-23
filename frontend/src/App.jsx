@@ -9,10 +9,12 @@ import Product from './pages/Product/Product';
 import Cart from './pages/Cart/Cart';
 import { Login, Register } from './pages/Login/Login';
 import CheckoutSuccess from './Components/Payments/CheckoutSuccess';
+import CheckoutCancel from './Components/Payments/CheckoutCancel';
 import NotFound from './pages/NotFound/NotFound';
+import { useSelector } from 'react-redux';
 
 const App = () => {
-  const user = false; // Defina sua lógica de autenticação aqui
+  const user = useSelector((state) => state.user.currentUser); // Defina sua lógica de autenticação aqui
   return (
     <BrowserRouter>
       <ThemeProvider theme={theme}>
@@ -21,7 +23,7 @@ const App = () => {
           <Route path="/products/:category" element={<ProductList />} />
           <Route path="/product/:id" element={<Product />} />
           <Route path="/cart" element={<Cart />} />
-          <Route path="/success" />
+          <Route path="/cancel" element={<CheckoutCancel />} />
           <Route path="/checkout-success" element={<CheckoutSuccess />} />
           <Route
             path="/login"

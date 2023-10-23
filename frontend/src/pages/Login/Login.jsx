@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import {
   Agreement,
   Button,
@@ -7,7 +8,10 @@ import {
   Title,
   Wrapper,
   Link,
+  Error,
 } from './styles';
+import { useDispatch, useSelector } from 'react-redux';
+import { login } from '../../redux/apiCalls';
 
 export const Register = () => {
   return (
@@ -33,14 +37,34 @@ export const Register = () => {
 };
 
 export const Login = () => {
+  const [email, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const dispatch = useDispatch();
+  const { isFetching, error } = useSelector((state) => state.user);
+
+  const handleClick = (e) => {
+    e.preventDefault();
+    console.log(isFetching, error);
+    login(dispatch, { email, password });
+  };
   return (
     <Container>
       <Wrapper width="25%">
         <Title>SIGN IN</Title>
         <Form direction="column">
-          <Input placeholder="Type your e-mail" />
-          <Input placeholder="Type your password" />
-          <Button>LOGIN</Button>
+          <Input
+            placeholder="E-mail"
+            onChange={(e) => setUsername(e.target.value)}
+          />
+          <Input
+            placeholder="Password"
+            type="password"
+            onChange={(e) => setPassword(e.target.value)}
+          />
+          <Button onClick={handleClick} disabled={isFetching}>
+            LOGIN
+          </Button>
+          {error && <Error>O-ou... Algo deu errado</Error>}
           <Link>I forgot my password</Link>
           <Link>Create new account</Link>
         </Form>

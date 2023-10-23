@@ -38,6 +38,7 @@ class AuthController {
       const queryUser = await UserModel.findOne({ email: req.body.email });
 
       if (!queryUser) {
+        console.log(queryUser, req.body.email);
         return res.status(401).json({
           errors: 'Usuário não encontrado',
         });

@@ -7,6 +7,12 @@ import { Link } from 'react-router-dom';
 const Navbar = () => {
   // usando redux cart
   const { quantity } = useSelector((state) => state.cart);
+
+  const linkStyle = {
+    textDecoration: 'none',
+    color: '#000', // Cor do link (opcional)
+  };
+
   return (
     <Styled.Container>
       <Styled.Wrapper>
@@ -21,8 +27,12 @@ const Navbar = () => {
           <Styled.Logo>LOGO</Styled.Logo>
         </Styled.Center>
         <Styled.Right>
-          <Styled.MenuItem>REGISTER</Styled.MenuItem>
-          <Styled.MenuItem>SIGN IN</Styled.MenuItem>
+          <Link to="/register" style={linkStyle}>
+            <Styled.MenuItem>REGISTER</Styled.MenuItem>
+          </Link>
+          <Link to="/login" style={linkStyle}>
+            <Styled.MenuItem>SIGN IN</Styled.MenuItem>
+          </Link>
           <Link to="/cart">
             <Styled.MenuItem>
               <Badge

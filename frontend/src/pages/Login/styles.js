@@ -56,7 +56,16 @@ export const Button = styled.button`
   background-color: teal;
   color: white;
   cursor: pointer;
-  margin-bottom: 5px;
+  margin: 10px 0 10px 0;
+
+  &:disabled {
+    color: green;
+    cursor: not-allowed;
+  }
+`;
+
+export const Error = styled.span`
+  color: red;
 `;
 
 export const Link = styled.a`
