@@ -3,9 +3,10 @@ import UserModel from '../models/User';
 class UserController {
   async index(req, res) {
     const query = req.query.new;
+    // console.log(req);
 
+    // console.log(req.isAdmin);
     try {
-      console.log(req.userIsAdmin);
       if (!req.userIsAdmin) {
         return res
           .status(401)
