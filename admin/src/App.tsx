@@ -10,12 +10,17 @@ import "./styles/global.scss";
 import User from "./pages/user/User";
 import Product from "./pages/product/Product";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import PermissionDenied from "./pages/noAccess/PermissionDenied";
 
 const queryClient = new QueryClient();
-
 function App() {
+  const storageData = localStorage.getItem("persist:root");
+  const isAdmin: boolean = storageData
+    ? JSON.parse(JSON.parse(storageData).user).currentUser?.isAdmin
+    : false;
+
   const Layout = () => {
-    return (
+    return isAdmin ? (
       <div className="main">
         <Navbar />
         <div className="container">
@@ -30,6 +35,8 @@ function App() {
         </div>
         <Footer />
       </div>
+    ) : (
+      <PermissionDenied />
     );
   };
 

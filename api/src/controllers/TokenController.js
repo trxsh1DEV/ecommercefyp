@@ -27,12 +27,11 @@ class TokenController {
         });
       }
       const { id, email: mail, isAdmin } = user;
-      console.log('admin', isAdmin);
       const token = jwt.sign({ id, mail, isAdmin }, process.env.TOKEN_SECRET, {
         expiresIn: process.env.TOKEN_EXPIRATION,
       });
 
-      return res.status(201).json({ token });
+      return res.status(201).json({ token, isAdmin });
     } catch (err) {
       return res.status(400).json({
         errors: ['Não foi possível gerar token'],

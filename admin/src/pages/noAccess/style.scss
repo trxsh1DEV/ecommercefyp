@@ -1,0 +1,20 @@
+/* PermissionDenied.scss */
+.permission-denied {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+
+  .content {
+    text-align: center;
+
+    h1 {
+      font-size: 36px;
+    }
+
+    p {
+      font-size: 18px;
+      margin-top: 16px;
+    }
+  }
+}
