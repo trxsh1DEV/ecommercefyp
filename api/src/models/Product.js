@@ -14,7 +14,7 @@ class ProductModel {
           },
         },
         desc: { type: String, required: true },
-        img: { type: String, required: true },
+        image: { type: String, required: true },
         categories: { type: Array, required: true, default: '.all' },
         size: { type: Array, default: 'XS' },
         color: { type: Array, default: 'white' },

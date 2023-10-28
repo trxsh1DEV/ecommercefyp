@@ -8,7 +8,14 @@ import {
   deleteProductFailure,
   deleteProductStart,
   deleteProductSuccess,
+  updateProductStart,
+  updateProductSuccess,
+  updateProductFailure,
+  addProductStart,
+  addProductSuccess,
+  addProductFailure,
 } from "./productRedux";
+import { Product } from "./types";
 
 export const login = async (dispatch: Dispatch, user: any) => {
   dispatch(loginStart());
@@ -37,5 +44,29 @@ export const deleteProduct = async (id: string, dispatch: Dispatch) => {
     dispatch(deleteProductSuccess(res.data));
   } catch (err) {
     dispatch(deleteProductFailure());
+  }
+};
+
+export const updateProduct = async (
+  id: string,
+  product: Product,
+  dispatch: Dispatch
+) => {
+  dispatch(updateProductStart());
+  try {
+    // update
+    dispatch(updateProductSuccess({ id, product }));
+  } catch (err) {
+    dispatch(updateProductFailure());
+  }
+};
+
+export const addProduct = async (product: Product, dispatch: Dispatch) => {
+  dispatch(addProductStart());
+  try {
+    const res = await userRequest.post(`/products`, product);
+    dispatch(addProductSuccess(res.data));
+  } catch (err) {
+    dispatch(addProductFailure());
   }
 };

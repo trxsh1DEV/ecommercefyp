@@ -9,7 +9,6 @@ import { Product as ProductType } from "../../redux/types";
 const Product = () => {
   const location = useLocation();
   const productId = location.pathname.split("/")[2];
-  console.log(productId);
   const product: ProductType | undefined = useSelector((state: RootState) => {
     return state.product.products.find((product) => product._id === productId);
   });

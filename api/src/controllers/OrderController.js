@@ -69,7 +69,6 @@ class OrderController {
       if (!deletedOrder) {
         return res.status(400).json({ errors: ['Pedido não encontrado'] });
       }
-      console.log('');
       return res.status(200).json('O pedido foi deletado com sucesso!');
     } catch (err) {
       return res
@@ -109,7 +108,6 @@ class OrderController {
           },
         },
       ]);
-      console.log(income);
       res.status(200).json(income);
     } catch (err) {
       res.status(500).json('Falha ao tentar obter dados rendimentos');

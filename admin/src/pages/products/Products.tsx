@@ -11,11 +11,11 @@ import { RootState } from "../../redux/types.js";
 const columns: GridColDef[] = [
   { field: "_id", headerName: "ID", width: 110 },
   {
-    field: "img",
+    field: "image",
     headerName: "Imagem",
     width: 100,
     renderCell: (params) => {
-      return <img src={params.row.img || "noavatar.png"}></img>;
+      return <img src={params.row.image || "noavatar.png"}></img>;
     },
   },
   { field: "title", headerName: "Title", width: 200 },
@@ -24,6 +24,13 @@ const columns: GridColDef[] = [
   { field: "ww", headerName: "Producer", width: 200 },
   { field: "createdAt", headerName: "createdAt", width: 200 },
   { field: "inStock", headerName: "Stock", width: 150, type: "boolean" },
+];
+
+const columnsAddProduct: GridColDef[] = [
+  { field: "title", headerName: "Title", type: "text" },
+  { field: "price", headerName: "Price (R$)", type: "number" },
+  { field: "desc", headerName: "Description", type: "text" },
+  // { field: "inStock", headerName: "Stock", width: 150, type: "boolean" },
 ];
 
 const Products = () => {
@@ -47,7 +54,9 @@ const Products = () => {
         <button onClick={() => setOpen(true)}>Add New Products</button>
       </div>
       <DataTable slug="products" columns={columns} rows={productsWithIds} />
-      {open && <Add slug="product" columns={columns} setOpen={setOpen} />}
+      {open && (
+        <Add slug="product" columns={columnsAddProduct} setOpen={setOpen} />
+      )}
     </div>
   );
 };

@@ -47,7 +47,6 @@ const Single = ({ product, ...props }) => {
     const getStats = async () => {
       try {
         const res = await userRequest.get("orders/income?pid=" + product._id);
-        console.log(product._id);
         const list = res.data.sort((a, b) => {
           return a._id - b._id;
         });
@@ -71,9 +70,6 @@ const Single = ({ product, ...props }) => {
     { name: "Sales", color: "#82ca9d" },
     { name: "graphic", color: "#8884d8" },
   ];
-
-  // pStats.map((dataKey) => console.log(dataKey.name));
-  console.log(pStats);
 
   return (
     <div className="single">
@@ -117,8 +113,9 @@ const Single = ({ product, ...props }) => {
                 <YAxis />
                 <Tooltip />
                 <Legend />
-                {obj.map((dataKey) => (
+                {obj.map((dataKey, index) => (
                   <Line
+                    key={index}
                     type="monotone"
                     // essa parte aparentemente mexe com todo o gráfico, se eu mudar o .name tudo para de funcionar
                     dataKey={dataKey.name}
