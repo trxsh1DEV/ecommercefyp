@@ -3,7 +3,7 @@
 .single {
   display: flex;
 
-  @include xl{
+  @include xl {
     flex-direction: column;
     gap: 50px;
   }
@@ -34,6 +34,10 @@
         .item {
           margin: 30px 0px;
 
+          .itens {
+            margin-bottom: 20px;
+          }
+
           .itemTitle {
             font-weight: 600;
             margin-right: 10px;
@@ -49,7 +53,7 @@
       border: 0.5px solid gray;
       margin: 20px 0px;
 
-      @include md{
+      @include md {
         display: none;
       }
     }
@@ -59,7 +63,7 @@
       width: 80%;
       height: 400px;
 
-      @include md{
+      @include md {
         display: none;
       }
     }
@@ -96,15 +100,15 @@
           padding: 15px;
           background-color: #f45b6810;
 
-          @include md{
+          @include md {
             min-width: 250px;
           }
 
-          p{
+          p {
             margin-bottom: 5px;
           }
 
-          time{
+          time {
             font-size: 12px;
           }
         }
