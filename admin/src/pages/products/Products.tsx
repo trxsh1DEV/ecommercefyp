@@ -1,74 +1,54 @@
-import "./products.scss";
-import { DataGrid } from "@mui/x-data-grid";
-import { DeleteOutline } from "@mui/icons-material";
-import { Link } from "react-router-dom";
-import { useEffect } from "react";
+import { useState } from "react";
+import "./Products.scss";
+import DataTable from "../../components/dataTable/DataTable";
+import Add from "../../components/add/Add";
+import { GridColDef } from "@mui/x-data-grid";
 import { useDispatch, useSelector } from "react-redux";
-import { getProducts } from "../../redux/apiCalls";
+import { useEffect } from "react";
+import { getProducts } from "../../redux/apiCalls.js";
+import { RootState } from "../../redux/types.js";
 
-export default function ProductList() {
+const columns: GridColDef[] = [
+  { field: "_id", headerName: "ID", width: 110 },
+  {
+    field: "img",
+    headerName: "Imagem",
+    width: 100,
+    renderCell: (params) => {
+      return <img src={params.row.img || "noavatar.png"}></img>;
+    },
+  },
+  { field: "title", headerName: "Title", width: 200 },
+  { field: "color", headerName: "Color", width: 170 },
+  { field: "price", headerName: "Price (R$)", width: 160 },
+  { field: "ww", headerName: "Producer", width: 200 },
+  { field: "createdAt", headerName: "createdAt", width: 200 },
+  { field: "inStock", headerName: "Stock", width: 150, type: "boolean" },
+];
+
+const Products = () => {
+  const [open, setOpen] = useState(false);
   const dispatch = useDispatch();
-  const products = useSelector((state) => state.product.products);
+  const products = useSelector((state: RootState) => state.product.products);
 
   useEffect(() => {
     getProducts(dispatch);
-  }, [dispatch]);
+  }, []);
 
-  // const handleDelete = (id) => {
-  //   deleteProduct(id, dispatch);
-  // };
-
-  const columns = [
-    { field: "_id", headerName: "ID", width: 220 },
-    {
-      field: "product",
-      headerName: "Product",
-      width: 200,
-      renderCell: (params) => {
-        return (
-          <div className="productListItem">
-            <img className="productListImg" src={params.row.img} alt="" />
-            {params.row.title}
-          </div>
-        );
-      },
-    },
-    { field: "inStock", headerName: "Stock", width: 200 },
-    {
-      field: "price",
-      headerName: "Price",
-      width: 160,
-    },
-    {
-      field: "action",
-      headerName: "Action",
-      width: 150,
-      renderCell: (params) => {
-        return (
-          <>
-            <Link to={"/product/" + params.row._id}>
-              <button className="productListEdit">Edit</button>
-            </Link>
-            <DeleteOutline
-              className="productListDelete"
-              // onClick={() => handleDelete(params.row._id)}
-            />
-          </>
-        );
-      },
-    },
-  ];
+  const productsWithIds = products.map((product, index) => ({
+    ...product,
+    id: product._id || index,
+  }));
 
   return (
-    <div className="productList">
-      <DataGrid
-        rows={products}
-        disableSelectionOnClick
-        columns={columns}
-        getRowId={(row) => row._id}
-        pageSize={8}
-        checkboxSelection
-      />
+    <div className="products">
+      <div className="info">
+        <h1>Products</h1>
+        <button onClick={() => setOpen(true)}>Add New Products</button>
+      </div>
+      <DataTable slug="products" columns={columns} rows={productsWithIds} />
+      {open && <Add slug="product" columns={columns} setOpen={setOpen} />}
     </div>
   );
-}
+};
+export default Products;
