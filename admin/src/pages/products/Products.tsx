@@ -1,88 +1,74 @@
-import { useState } from "react";
-import "./Products.scss";
-import DataTable from "../../components/dataTable/DataTable";
-import Add from "../../components/add/Add";
-import { GridColDef } from "@mui/x-data-grid";
-import { products } from "../../data";
+import "./products.scss";
+import { DataGrid } from "@mui/x-data-grid";
+import { DeleteOutline } from "@mui/icons-material";
+import { Link } from "react-router-dom";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { getProducts } from "../../redux/apiCalls";
 
-const columns: GridColDef[] = [
-  { field: "id", headerName: "ID", width: 90 },
-  {
-    field: "img",
-    headerName: "Image",
-    width: 100,
-    renderCell: (params) => {
-      return <img src={params.row.img || "/noavatar.png"} alt="" />;
+export default function ProductList() {
+  const dispatch = useDispatch();
+  const products = useSelector((state) => state.product.products);
+
+  useEffect(() => {
+    getProducts(dispatch);
+  }, [dispatch]);
+
+  // const handleDelete = (id) => {
+  //   deleteProduct(id, dispatch);
+  // };
+
+  const columns = [
+    { field: "_id", headerName: "ID", width: 220 },
+    {
+      field: "product",
+      headerName: "Product",
+      width: 200,
+      renderCell: (params) => {
+        return (
+          <div className="productListItem">
+            <img className="productListImg" src={params.row.img} alt="" />
+            {params.row.title}
+          </div>
+        );
+      },
     },
-  },
-  {
-    field: "title",
-    type: "string",
-    headerName: "Title",
-    width: 250,
-  },
-  {
-    field: "color",
-    type: "string",
-    headerName: "Color",
-    width: 150,
-  },
-  {
-    field: "price",
-    type: "string",
-    headerName: "Price",
-    width: 200,
-  },
-  {
-    field: "producer",
-    headerName: "Producer",
-    type: "string",
-    width: 200,
-  },
-  {
-    field: "createdAt",
-    headerName: "Created At",
-    width: 200,
-    type: "string",
-  },
-  {
-    field: "inStock",
-    headerName: "In Stock",
-    width: 150,
-    type: "boolean",
-  },
-];
-
-const Products = () => {
-  const [open, setOpen] = useState(false);
-
-  // TEST THE API
-
-  // const { isLoading, data } = useQuery({
-  //   queryKey: ["allproducts"],
-  //   queryFn: () =>
-  //     fetch("http://localhost:8800/api/products").then(
-  //       (res) => res.json()
-  //     ),
-  // });
+    { field: "inStock", headerName: "Stock", width: 200 },
+    {
+      field: "price",
+      headerName: "Price",
+      width: 160,
+    },
+    {
+      field: "action",
+      headerName: "Action",
+      width: 150,
+      renderCell: (params) => {
+        return (
+          <>
+            <Link to={"/product/" + params.row._id}>
+              <button className="productListEdit">Edit</button>
+            </Link>
+            <DeleteOutline
+              className="productListDelete"
+              // onClick={() => handleDelete(params.row._id)}
+            />
+          </>
+        );
+      },
+    },
+  ];
 
   return (
-    <div className="products">
-      <div className="info">
-        <h1>Products</h1>
-        <button onClick={() => setOpen(true)}>Add New Products</button>
-      </div>
-      <DataTable slug="products" columns={columns} rows={products} />
-      {/* TEST THE API */}
-
-      {/* {isLoading ? (
-        "Loading..."
-      ) : (
-        <DataTable slug="products" columns={columns} rows={data} />
-      )} */}
-      {open && <Add slug="product" columns={columns} setOpen={setOpen} />}
+    <div className="productList">
+      <DataGrid
+        rows={products}
+        disableSelectionOnClick
+        columns={columns}
+        getRowId={(row) => row._id}
+        pageSize={8}
+        checkboxSelection
+      />
     </div>
   );
-};
-
-export default Products;
+}

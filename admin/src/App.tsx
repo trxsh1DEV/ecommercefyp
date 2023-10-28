@@ -11,6 +11,7 @@ import User from "./pages/user/User";
 import Product from "./pages/product/Product";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import PermissionDenied from "./pages/noAccess/PermissionDenied";
+import Charts from "./pages/analytics/Charts";
 
 const queryClient = new QueryClient();
 function App() {
@@ -64,6 +65,10 @@ function App() {
         {
           path: "/products/:id",
           element: <Product />,
+        },
+        {
+          path: "/analytics/charts",
+          element: <Charts />,
         },
       ],
     },

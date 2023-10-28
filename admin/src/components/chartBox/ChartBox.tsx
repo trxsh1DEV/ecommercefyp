@@ -1,6 +1,8 @@
 import { Link } from "react-router-dom";
 import "./chartBox.scss";
 import { Line, LineChart, ResponsiveContainer, Tooltip } from "recharts";
+import { useState, useEffect } from "react";
+import { userRequest } from "../../utils/requestMethods";
 
 type Props = {
   color: string;
@@ -12,7 +14,26 @@ type Props = {
   chartData: object[];
 };
 
+interface chartBox {
+  _id: string;
+  total: number;
+}
+
 const ChartBox = (props: Props) => {
+  const [income, setIncome] = useState<chartBox[]>([]);
+  const [perc, setPerc] = useState(0);
+
+  useEffect(() => {
+    const getIncome = async () => {
+      try {
+        const res = await userRequest.get("orders/income");
+        setIncome(res.data);
+        setPerc((res.data[1].total * 100) / res.data[0].total - 100);
+      } catch {}
+    };
+    getIncome();
+  }, []);
+
   return (
     <div className="chartBox">
       <div className="boxInfo">
@@ -20,7 +41,7 @@ const ChartBox = (props: Props) => {
           <img src={props.icon} alt="" />
           <span>{props.title}</span>
         </div>
-        <h1>{props.number}</h1>
+        <h1>{income[1]?.total}</h1>
         <Link to="/" style={{ color: props.color }}>
           View all
         </Link>
@@ -32,7 +53,7 @@ const ChartBox = (props: Props) => {
               <Tooltip
                 contentStyle={{ background: "transparent", border: "none" }}
                 labelStyle={{ display: "none" }}
-                position={{ x: 10, y: 70 }}
+                position={{ x: 10, y: 40 }}
               />
               <Line
                 type="monotone"
@@ -47,11 +68,11 @@ const ChartBox = (props: Props) => {
         <div className="texts">
           <span
             className="percentage"
-            style={{ color: props.percentage < 0 ? "tomato" : "limegreen" }}
+            style={{ color: perc < 0 ? "tomato" : "limegreen" }}
           >
-            {props.percentage}%
+            {Math.floor(perc)}%
           </span>
-          <span className="duration">this month</span>
+          <span className="duration">Compare to last month</span>
         </div>
       </div>
     </div>

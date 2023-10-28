@@ -126,12 +126,13 @@ class UserController {
         },
       ]);
 
-      return res.status(200).json(
-        data.map((item) => ({
-          mes: item._id, // Renomeia _id para mes
-          total: item.total, // Mantém o campo total
-        })),
-      );
+      // return res.status(200).json(
+      //   data.map((item) => ({
+      //     name: item._id, // Renomeia _id para name
+      //     total: item.total, // Mantém o campo total
+      //   })),
+      // );
+      return res.status(200).json(data);
     } catch (err) {
       return res.status(500).json({
         errors: [

@@ -5,7 +5,7 @@ import { Visibility } from "@mui/icons-material";
 
 const TopBox = () => {
   interface User {
-    _id: number;
+    _id: string;
     img: string;
     email: string;
     // username: string;
@@ -43,7 +43,7 @@ const TopBox = () => {
                 <span className="email">{user.email}</span>
               </div>
             </div>
-            {/* <span className="amount">${user.amount}</span> */}
+            {/* <span className="amount">{user.amount}</span> */}
             <button className="widgetSmButton">
               <Visibility className="widgetSmIcon" />
               Display

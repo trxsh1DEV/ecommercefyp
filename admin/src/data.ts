@@ -102,7 +102,7 @@ export const menu = [
       {
         id: 1,
         title: "Charts",
-        url: "/",
+        url: "/analytics/charts",
         icon: "chart.svg",
       },
       {
@@ -554,8 +554,6 @@ export const products = [
     inStock: true,
   },
 ];
-
-
 
 export const singleUser = {
   id: 1,

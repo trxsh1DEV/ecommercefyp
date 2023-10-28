@@ -31,7 +31,7 @@ class TokenController {
         expiresIn: process.env.TOKEN_EXPIRATION,
       });
 
-      return res.status(201).json({ token, isAdmin });
+      return res.status(201).json({ token, isAdmin, mail });
     } catch (err) {
       return res.status(400).json({
         errors: ['Não foi possível gerar token'],

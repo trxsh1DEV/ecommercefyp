@@ -17,6 +17,7 @@ export default async (req, res, next) => {
     const { id, mail: email } = data;
 
     const user = await User.findOne({ _id: id, email });
+    console.log(user);
 
     if (!user) {
       return res.status(401).json({
