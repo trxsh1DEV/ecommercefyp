@@ -12,6 +12,7 @@ import Product from "./pages/product/Product";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import PermissionDenied from "./pages/noAccess/PermissionDenied";
 import Charts from "./pages/analytics/Charts";
+import Edit from "./pages/testPage/Edit";
 
 const queryClient = new QueryClient();
 function App() {
@@ -66,6 +67,10 @@ function App() {
           path: "/products/:id",
           element: <Product />,
         },
+        // {
+        //   path: "/products/edit/:id",
+        //   element: <Edit />,
+        // },
         {
           path: "/analytics/charts",
           element: <Charts />,

@@ -8,7 +8,7 @@ router.get('/', ProductController.index);
 router.get('/:id', ProductController.show);
 
 router.post('/', tokenAndAdmin, ProductController.store);
-router.put('/:id', tokenAndAdmin, ProductController.update);
+router.put('/edit/:id', tokenAndAdmin, ProductController.update);
 router.delete('/:id', tokenAndAdmin, ProductController.delete);
 
 export default router;

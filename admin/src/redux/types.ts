@@ -6,8 +6,8 @@ export interface Product {
   categories: string[];
   size: string[];
   color: string[];
-  price: number;
-  inStock: boolean;
+  price: number | string;
+  inStock: boolean | string;
   createdAt: string;
   updatedAt: string;
 }

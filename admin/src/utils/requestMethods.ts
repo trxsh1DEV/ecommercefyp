@@ -20,9 +20,6 @@ const TOKEN: string =
   localStorageData && "user" in localStorageData
     ? JSON.parse(localStorageData.user).currentUser?.token
     : "";
-
-console.log(TOKEN);
-
 // console.log(localStorage.getItem("persist:root"));
 
 export const publicRequest = axios.create({

@@ -70,7 +70,6 @@ const Single = ({ product, ...props }) => {
     { name: "Sales", color: "#82ca9d" },
     { name: "graphic", color: "#8884d8" },
   ];
-
   return (
     <div className="single">
       <div className="view">
@@ -85,7 +84,9 @@ const Single = ({ product, ...props }) => {
             <div className="item">
               <div className="itemTitle itens">Produto: {product.title}</div>
               <div className="itemValue itens">Preço: {product.price}</div>
-              <div className="itemColor itens">Cor(es): {product.color}</div>
+              <div className="itemColor itens">
+                Cor(es): {product.color.map((item) => item)}
+              </div>
               <div className="itemFacturer itens">Fabricante: 'production'</div>
               <div className="itemFrom itens">Exportado de: 'production'</div>
             </div>

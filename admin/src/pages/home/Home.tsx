@@ -4,6 +4,7 @@ import ChartBox from "../../components/chartBox/ChartBox";
 import PieChartBox from "../../components/pieCartBox/PieChartBox";
 import TopBox from "../../components/topBox/TopBox";
 import {
+  barChartBoxRevenue,
   chartBoxConversion,
   chartBoxProduct,
   chartBoxRevenue,
@@ -17,13 +18,17 @@ const Home = () => {
       <div className="box box1">
         <TopBox />
       </div>
-      <div className="box box2">{/* <ChartBox {...chartBoxUser} /> */}</div>
-      <div className="box box3">{/* <ChartBox {...chartBoxProduct} /> */}</div>
+      <div className="box box2">
+        <ChartBox {...chartBoxUser} />
+      </div>
+      <div className="box box3">
+        <ChartBox {...chartBoxProduct} />
+      </div>
       <div className="box box4">
         <PieChartBox />
       </div>
       <div className="box box5">
-        {/* <ChartBox {...chartBoxConversion} /> */}
+        <ChartBox {...chartBoxConversion} />
       </div>
       <div className="box box6">
         <ChartBox {...chartBoxRevenue} />
@@ -34,9 +39,9 @@ const Home = () => {
       <div className="box box8">
         <BarChartBox />
       </div>
-      {/* <div className="box box9">
+      <div className="box box9">
         <BarChartBox {...barChartBoxRevenue} />
-      </div> */}
+      </div>
     </div>
   );
 };
