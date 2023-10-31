@@ -3,20 +3,25 @@ import axios from "axios";
 interface LocalStorageData {
   user: {
     currentUser: {
-      token: null;
-    }; // Adicione outras propriedades, se necessário
+      token: string;
+    };
   };
 }
 
 // Tente obter os dados do localStorage e realizar a análise do JSON
-const localStorageData: LocalStorageData | null = JSON.parse(
+const localStorageData = JSON.parse(
   localStorage.getItem("persist:root") || "null"
 );
 
 const BASE_URL = "http://localhost:5123/api/";
 
-const TOKEN: string | undefined = JSON.parse(localStorageData.user).currentUser
-  .token;
+// Verifica se `localStorageData` não é nulo e se possui a estrutura correta
+const TOKEN: string =
+  localStorageData && "user" in localStorageData
+    ? JSON.parse(localStorageData.user).currentUser?.token
+    : "";
+
+console.log(TOKEN);
 
 // console.log(localStorage.getItem("persist:root"));
 
