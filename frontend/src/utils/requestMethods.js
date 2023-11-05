@@ -13,13 +13,12 @@ export const url = 'http://localhost:5123/api';
 
 const user = JSON.parse(localStorage.getItem('persist:root'))?.user;
 const currentUser = user && JSON.parse(user).currentUser;
-// eslint-disable-next-line
-const TOKEN = currentUser?.accessToken;
+const TOKEN = currentUser?.token;
 
 export const publicRequest = axios.create({
   baseURL: url,
 });
 export const userRequest = axios.create({
   baseURL: url,
-  headers: { token: `Bearer ${TOKEN}` },
+  headers: { authorization: `Bearer ${TOKEN}` },
 });

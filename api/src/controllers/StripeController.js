@@ -11,7 +11,7 @@ class StripeController {
           currency: 'brl',
           product_data: {
             name: item.title,
-            images: [item.img],
+            images: [item.image],
             description: item.desc,
             metadata: {
               id: item._id,

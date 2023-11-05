@@ -7,7 +7,7 @@ class ProductController {
     const qCategory = req.query.category;
 
     try {
-      let query = Product.find(); // Consulta base
+      let query = Product.find().sort({ createdAt: -1 }); // Consulta base
 
       if (qNew) {
         query = query.sort({ createdAt: -1 }).limit(1);
@@ -34,7 +34,11 @@ class ProductController {
     const newProduct = new Product(req.body);
 
     try {
+      if (!newProduct && !newProduct.price)
+        res.status(400).json({ errors: ['Produto inválido'] });
+      newProduct.price = parseFloat(newProduct.price.toFixed(2));
       const savedProduct = await newProduct.save();
+
       return res.status(200).json(savedProduct);
     } catch (err) {
       let removeContent = err.message.indexOf(':');
@@ -46,7 +50,7 @@ class ProductController {
             .split(', '))
         : (removeContent = err.message.split(', '));
 
-      return res.status(500).json({
+      return res.status(400).json({
         errors: removeContent.map((e) => e),
       });
     }

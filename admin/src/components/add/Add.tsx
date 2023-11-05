@@ -35,6 +35,11 @@ const Add: React.FC<Props> = (props: Props) => {
   };
 
   const handleUpload = () => {
+    const product = {
+      ...inputs,
+      categories: category,
+    };
+
     if (file) {
       const fileName = new Date().getTime() + file.name;
       const storage = getStorage(app);
@@ -66,17 +71,13 @@ const Add: React.FC<Props> = (props: Props) => {
         () => {
           // Lógica de conclusão
           getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-            const product = {
-              ...inputs,
-              image: downloadURL,
-              categories: category,
-            };
-            console.log(product);
-            addProduct(product, dispatch);
+            product.image = downloadURL;
           });
         }
       );
     }
+
+    addProduct(product, dispatch);
   };
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {

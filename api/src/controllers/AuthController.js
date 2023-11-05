@@ -1,5 +1,6 @@
 import bcryptjs from 'bcryptjs';
 import UserModel from '../models/User';
+import jwt from 'jsonwebtoken';
 
 class AuthController {
   // Register
@@ -35,9 +36,9 @@ class AuthController {
 
   async login(req, res) {
     try {
-      const queryUser = await UserModel.findOne({ email: req.body.email });
+      const user = await UserModel.findOne({ email: req.body.email });
 
-      if (!queryUser) {
+      if (!user) {
         return res.status(401).json({
           errors: 'Usuário não encontrado',
         });
@@ -45,13 +46,21 @@ class AuthController {
 
       const inputPassword = req.body.password;
 
-      if (!bcryptjs.compareSync(inputPassword, queryUser.password)) {
+      if (!bcryptjs.compareSync(inputPassword, user.password)) {
         return res.status(401).json({
           errors: 'Credencias inválidas, verifique o login e/ou a senha',
         });
       }
-      const { password, ...others } = queryUser._doc;
-      return res.status(200).json(others);
+      const token = jwt.sign(
+        { id: user._id, email: user.email, isAdmin: user.isAdmin },
+        process.env.TOKEN_SECRET,
+        {
+          expiresIn: process.env.TOKEN_EXPIRATION,
+        },
+      );
+
+      const { password, ...others } = user._doc;
+      return res.status(200).json({ others, token });
     } catch (err) {
       let removeContent = err.message.indexOf(':');
 

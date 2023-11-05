@@ -67,12 +67,12 @@ const Products = ({ category, filters, sort }) => {
 };
 
 Products.propTypes = {
-  category: P.string.isRequired,
+  category: P.string,
   filters: P.shape({
     size: P.string,
     color: P.string,
   }),
-  sort: P.string.isRequired,
+  sort: P.string,
 };
 
 export default Products;

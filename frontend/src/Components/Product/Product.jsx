@@ -8,14 +8,15 @@ import P from 'prop-types';
 import { Link } from 'react-router-dom';
 
 const Product = ({ item }) => {
-  if (!item || !item.img) {
+  if (!item || !item.image) {
+    console.log(item.image);
     return null; // or display an error message
   }
 
   return (
     <Container>
       <Circle />
-      <Image src={item.img} />
+      <Image src={item.image} />
       <Info>
         <Icon>
           <ShoppingCartOutlined />
@@ -36,7 +37,7 @@ const Product = ({ item }) => {
 Product.propTypes = {
   item: P.shape({
     _id: P.string.isRequired,
-    img: P.string.isRequired,
+    image: P.string.isRequired,
   }).isRequired,
 };
 

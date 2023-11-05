@@ -44,7 +44,6 @@ export const Login = () => {
 
   const handleClick = (e) => {
     e.preventDefault();
-    console.log(isFetching, error);
     login(dispatch, { email, password });
   };
   return (

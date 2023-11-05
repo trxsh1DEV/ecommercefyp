@@ -2,6 +2,7 @@ import jwt from 'jsonwebtoken';
 import User from '../models/User';
 
 export default async (req, res, next) => {
+  console.log(req.headers);
   const { authorization } = req.headers;
 
   if (!authorization) {
@@ -14,10 +15,10 @@ export default async (req, res, next) => {
 
   try {
     const data = jwt.verify(token, process.env.TOKEN_SECRET);
-    const { id, mail: email } = data;
+    const { id, email } = data;
 
     const user = await User.findOne({ _id: id, email });
-    console.log(user);
+    // console.log(user);
 
     if (!user) {
       return res.status(401).json({

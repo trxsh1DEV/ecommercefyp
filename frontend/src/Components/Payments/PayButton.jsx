@@ -5,7 +5,7 @@ import { userRequest } from '../../utils/requestMethods';
 
 const PayButton = ({ cartItens }) => {
   const handleCheckout = async () => {
-    console.log(cartItens);
+    console.log('oi');
 
     userRequest
       .post(`create-checkout-session`, cartItens)

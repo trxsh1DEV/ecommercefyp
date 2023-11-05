@@ -24,7 +24,9 @@ const Navbar = () => {
           </Styled.SearchContainer>
         </Styled.Left>
         <Styled.Center>
-          <Styled.Logo>LOGO</Styled.Logo>
+          <Link to={'/'}>
+            <Styled.Logo>LOGO</Styled.Logo>
+          </Link>
         </Styled.Center>
         <Styled.Right>
           <Link to="/register" style={linkStyle}>

@@ -49,7 +49,7 @@ const Product = () => {
       <Announcement />
       <Styled.Wrapper>
         <Styled.ImgContainer>
-          <Styled.Image src={product.img} />
+          <Styled.Image src={product.image} />
         </Styled.ImgContainer>
         <Styled.InfoContainer>
           <Styled.Title>{product.title}</Styled.Title>
