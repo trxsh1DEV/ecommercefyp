@@ -2,10 +2,21 @@ import { css } from 'styled-components';
 
 export const theme = {
   colors: {
-    primaryColor: 'purple',
-    darkColor: '#333',
-    whiteColor: '#fff',
-    grayColor: 'lightgray',
+    primaryColor: '#6200EE',
+    primaryPurple: '#ea80fc',
+    darkColorLight: '#4a4b50',
+    darkColorStrong: '#191919',
+    lightPurple: '#bb86fc',
+    gray: '#aaaaaa',
+    lightGray: '#f8f8f8',
+    error: '#B00020',
+    blueMarin: '#3de0e0',
+    blueLight: '7debf4',
+    greenMarin: '#6fdcd3',
+    greenLight: '#70efde',
+    rose: '#d581d8',
+    lilas: '#caabfd',
+    pink: '#ffb5f7',
   },
   fonts: {
     family: {
@@ -20,7 +31,7 @@ export const theme = {
       xlarge: '4.0rem',
       xxlarge: '4.8rem',
       huge: '5.6rem',
-      xhuge: '6.4rem',
+      xxhuge: '7.8rem',
     },
   },
   spacings: {
@@ -40,7 +51,7 @@ export const theme = {
 
 export const mobile = (props) => {
   return css`
-    @media only screen and (max-width: 380px) {
+    @media only screen and (max-width: 760px) {
       ${props}
     }
   `;

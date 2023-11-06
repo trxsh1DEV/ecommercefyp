@@ -1,60 +1,81 @@
-import { Badge } from '@mui/material';
-import { ShoppingCartOutlined, Search } from '@mui/icons-material';
-import * as Styled from './styles';
-import { useSelector } from 'react-redux';
+// import { Badge } from '@mui/material';
+// import { ShoppingCartOutlined, Search } from '@mui/icons-material';
+import * as S from './styles';
+// import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 
-const Navbar = () => {
-  // usando redux cart
-  const { quantity } = useSelector((state) => state.cart);
+import { useState } from 'react';
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+import SearchIcon from '@mui/icons-material/Search';
+import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined';
+import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined';
+import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
+// import Cart from '../Cart/Cart';
 
-  const linkStyle = {
-    textDecoration: 'none',
-    color: '#000', // Cor do link (opcional)
-  };
+const Navbar = () => {
+  const [open, setOpen] = useState(false);
+  // const products = useSelector((state) => state.cart.products);
 
   return (
-    <Styled.Container>
-      <Styled.Wrapper>
-        <Styled.Left>
-          <Styled.Language>PT-BR</Styled.Language>
-          <Styled.SearchContainer>
-            <Styled.Input placeholder="Search" />
-            <Search style={{ color: 'gray', fontSize: 20 }} />
-          </Styled.SearchContainer>
-        </Styled.Left>
-        <Styled.Center>
-          <Link to={'/'}>
-            <Styled.Logo>LOGO</Styled.Logo>
+    <S.Navbar>
+      <S.Wrapper>
+        <S.Left>
+          <S.Item>
+            <img src="/img/en.png" alt="" />
+            <KeyboardArrowDownIcon />
+          </S.Item>
+          <S.Item>
+            <span>USD</span>
+            <KeyboardArrowDownIcon />
+          </S.Item>
+          <S.Item>
+            <Link className="link" to="/products/1"></Link>
+          </S.Item>
+          <S.Item>
+            <Link className="link" to="/products/2">
+              Pessoa física
+            </Link>
+          </S.Item>
+          <S.Item>
+            <Link className="link" to="/products/2">
+              Pessoa Juridica/Empresas
+            </Link>
+          </S.Item>
+        </S.Left>
+        <S.Center>
+          <Link className="link" to="/">
+            FYP Store
           </Link>
-        </Styled.Center>
-        <Styled.Right>
-          <Link to="/register" style={linkStyle}>
-            <Styled.MenuItem>REGISTER</Styled.MenuItem>
-          </Link>
-          <Link to="/login" style={linkStyle}>
-            <Styled.MenuItem>SIGN IN</Styled.MenuItem>
-          </Link>
-          <Link to="/cart">
-            <Styled.MenuItem>
-              <Badge
-                badgeContent={quantity}
-                color="primary"
-                sx={{
-                  '& .MuiBadge-badge': {
-                    fontSize: 15,
-                    height: 22,
-                    minWidth: 22,
-                  },
-                }}
-              >
-                <ShoppingCartOutlined sx={{ fontSize: 30 }} />
-              </Badge>
-            </Styled.MenuItem>
-          </Link>
-        </Styled.Right>
-      </Styled.Wrapper>
-    </Styled.Container>
+        </S.Center>
+        <S.Left>
+          <S.Item>
+            <Link className="link" to="/">
+              Início
+            </Link>
+          </S.Item>
+          <S.Item>
+            <Link className="link" to="/">
+              Sobre nós
+            </Link>
+          </S.Item>
+          <S.Item>
+            <Link className="link" to="/">
+              Contato corporativo
+            </Link>
+          </S.Item>
+          <S.Icons>
+            <SearchIcon fontSize="large" />
+            <PersonOutlineOutlinedIcon fontSize="large" />
+            <FavoriteBorderOutlinedIcon fontSize="large" />
+            <S.CartIcon onClick={() => setOpen(!open)} fontSize="large">
+              <ShoppingCartOutlinedIcon />
+              <S.Span>asdsa</S.Span>
+            </S.CartIcon>
+          </S.Icons>
+        </S.Left>
+      </S.Wrapper>
+      {/* {open && <Cart />} */}
+    </S.Navbar>
   );
 };
 
