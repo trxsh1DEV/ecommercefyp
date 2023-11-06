@@ -76,7 +76,9 @@ const Cart = () => {
                     <ProductAmount>{prod.quantity}</ProductAmount>
                     <Remove />
                   </ProductAmountContainer>
-                  <ProductPrice>$ {prod.price * prod.quantity}</ProductPrice>
+                  <ProductPrice>
+                    $ {(prod.price * prod.quantity).toFixed(2)}
+                  </ProductPrice>
                 </PriceDetail>
               </Product>
             ))}

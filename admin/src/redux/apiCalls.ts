@@ -14,16 +14,13 @@ import {
   addProductStart,
   addProductSuccess,
   addProductFailure,
-  getProductDetailsStart,
-  getProductDetailsSuccess,
-  getProductDetailsFailure,
 } from "./productRedux";
 import { Product } from "./types";
 
 export const login = async (dispatch: Dispatch, user: any) => {
   dispatch(loginStart());
   try {
-    const res = await publicRequest.post("/tokens", user);
+    const res = await publicRequest.post("/auth/login", user);
     dispatch(loginSuccess(res.data));
   } catch (err) {
     dispatch(loginFailure());
@@ -40,26 +37,11 @@ export const getProducts = async (dispatch: Dispatch) => {
   }
 };
 
-export const getProductDetails = async (id: string, dispatch: Dispatch) => {
-  dispatch(getProductDetailsStart());
-
-  try {
-    const response = await userRequest.get(`/products/${id}`);
-    dispatch(getProductDetailsSuccess(response.data));
-  } catch (err) {
-    console.error(
-      "Erro na chamada à API de busca de detalhes do produto:",
-      err
-    );
-    dispatch(getProductDetailsFailure());
-  }
-};
-
 export const deleteProduct = async (id: string, dispatch: Dispatch) => {
   dispatch(deleteProductStart());
   try {
-    const res = await userRequest.delete(`/products/${id}`);
-    dispatch(deleteProductSuccess(res.data));
+    await userRequest.delete(`/products/${id}`);
+    dispatch(deleteProductSuccess(id));
   } catch (err) {
     dispatch(deleteProductFailure());
   }
