@@ -1,15 +1,17 @@
 import styled, { css } from 'styled-components';
 import { mobile } from '../../styles/theme';
+import { Link } from 'react-router-dom';
 
 export const Navbar = styled.div`
   ${({ theme }) => css`
     height: ${theme.spacings.huge};
+    background-color: ${theme.colors.darkColorLight};
     ${mobile({ height: theme.spacings.xxlarge })}
   `}
 `;
 
 export const Wrapper = styled.div`
-  padding: 10px 30px;
+  padding: 1.2rem 3rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -20,12 +22,43 @@ export const Item = styled.div`
   display: flex;
   align-items: center;
   font-size: 18px;
+  position: relative;
+  padding-bottom: 5px;
+
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    top: 100%;
+    left: 50%;
+    width: 0;
+    height: 0.2rem;
+    background: ${({ theme }) =>
+      theme.colors.primaryPurple}; /* Defina a cor desejada */
+    transition: all 300ms ease-in-out;
+    transform: translateX(-50%);
+    color: red;
+
+  }
+
+  &:hover::after {
+    width: 65%;
+  }
+
+  &:hover {
+    opacity: .87;
+  }
+`;
+
+export const StyledLink = styled(Link)`
+  color: aliceblue;
 `;
 
 export const Image = styled.img``;
 
 export const Center = styled.div`
   font-size: 30px;
+  font-weight: bold;
   letter-spacing: 2px;
 `;
 
@@ -48,6 +81,11 @@ export const Icons = styled.div`
   cursor: pointer;
 `;
 
+export const IconStyles = css`
+  color: #fff;
+  font-size: large;
+`;
+
 export const CartIcon = styled.div`
   position: relative;
 `;
@@ -57,7 +95,7 @@ export const Span = styled.span`
   width: 20px;
   height: 20px;
   border-radius: 50%;
-  background-color: #2879fe;
+  background-color: blueviolet;
   color: white;
   position: absolute;
   right: -10px;
@@ -65,4 +103,8 @@ export const Span = styled.span`
   display: flex;
   align-items: center;
   justify-content: center;
+`;
+
+export const SpanText = styled.span`
+  color: aliceblue;
 `;

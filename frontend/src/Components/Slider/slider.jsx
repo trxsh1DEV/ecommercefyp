@@ -33,14 +33,14 @@ const Slider = () => {
       <Wrapper slideindex={slideIndex}>
         {sliderItems.map((item) => (
           <Slide bg={item.bg} key={item.id}>
-            <ImgContainer>
-              <Image src={item.img} />
-            </ImgContainer>
             <InfoContainer>
               <Title>{item.title}</Title>
               <Desc>{item.desc}</Desc>
-              <Button>SHOW NOW</Button>
+              <Button>Compre agora</Button>
             </InfoContainer>
+            <ImgContainer>
+              <Image src={item.img} />
+            </ImgContainer>
           </Slide>
         ))}
       </Wrapper>

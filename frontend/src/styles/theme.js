@@ -11,7 +11,7 @@ export const theme = {
     lightGray: '#f8f8f8',
     error: '#B00020',
     blueMarin: '#3de0e0',
-    blueLight: '7debf4',
+    blueLight: '#7debf4',
     greenMarin: '#6fdcd3',
     greenLight: '#70efde',
     rose: '#d581d8',
