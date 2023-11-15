@@ -34,7 +34,7 @@ const Add: React.FC<Props> = (props: Props) => {
     setCategory(e.target.value.split(","));
   };
 
-  const handleUpload = () => {
+  const handleUpload = async () => {
     const product = {
       ...inputs,
       categories: category,
@@ -42,39 +42,54 @@ const Add: React.FC<Props> = (props: Props) => {
 
     if (file) {
       const fileName = new Date().getTime() + file.name;
+      const filePath = "products/" + fileName;
       const storage = getStorage(app);
-      const storageRef = ref(storage, fileName);
+      const storageRef = ref(storage, filePath);
       const uploadTask = uploadBytesResumable(storageRef, file);
 
-      // Restante do código de upload
-      uploadTask.on(
-        "state_changed",
-        (snapshot) => {
-          // Observe eventos de mudança de estado, como progresso, pausa e retomada
-          const progress =
-            (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-          console.log("Upload está " + progress + "% completo");
-          switch (snapshot.state) {
-            case "paused":
-              console.log("Upload pausado");
-              break;
-            case "running":
-              console.log("Upload em andamento");
-              break;
-            default:
-          }
-        },
-        (error) => {
-          console.log(error);
-          // Lógica de tratamento de erro
-        },
-        () => {
-          // Lógica de conclusão
-          getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-            product.image = downloadURL;
-          });
-        }
-      );
+      try {
+        await new Promise<void>((resolve, reject) => {
+          // Handle state change events
+          uploadTask.on(
+            "state_changed",
+            (snapshot) => {
+              // Observe eventos de mudança de estado, como progresso, pausa e retomada
+              const progress =
+                (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+              console.log("Upload está " + progress + "% completo");
+              switch (snapshot.state) {
+                case "paused":
+                  console.log("Upload pausado");
+                  break;
+                case "running":
+                  console.log("Upload em andamento");
+                  break;
+                default:
+              }
+            },
+            (error) => {
+              console.error(error);
+              reject(error);
+            },
+            () => {
+              // Handle successful upload
+              getDownloadURL(uploadTask.snapshot.ref)
+                .then((downloadURL) => {
+                  product.image = downloadURL;
+                  resolve();
+                })
+                .catch((error) => {
+                  console.error(error);
+                  reject(error);
+                });
+            }
+          );
+        });
+      } catch (error) {
+        // Handle errors during the upload or URL retrieval
+        console.error("Error during upload:", error);
+        return;
+      }
     }
 
     addProduct(product, dispatch);

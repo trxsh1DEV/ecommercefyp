@@ -12,13 +12,12 @@ import Product from "./pages/product/Product";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import PermissionDenied from "./pages/noAccess/PermissionDenied";
 import Charts from "./pages/analytics/Charts";
-import Edit from "./pages/testPage/Edit";
 
 const queryClient = new QueryClient();
 function App() {
   const storageData = localStorage.getItem("persist:root");
   const isAdmin: boolean = storageData
-    ? JSON.parse(JSON.parse(storageData).user).currentUser?.isAdmin
+    ? JSON.parse(JSON.parse(storageData).user).currentUser.token
     : false;
 
   const Layout = () => {
