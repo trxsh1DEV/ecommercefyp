@@ -39,7 +39,7 @@ export const Wrapper = styled.div`
 
 export const Slide = styled.div`
   width: 100vw;
-  height: 100vh;
+  height: 100%;
   display: flex;
   align-items: center;
   background-color: #${(props) => props.bg};

@@ -51,7 +51,7 @@ export const theme = {
 
 export const mobile = (props) => {
   return css`
-    @media only screen and (max-width: 760px) {
+    @media only screen and (max-width: 770px) {
       ${props}
     }
   `;

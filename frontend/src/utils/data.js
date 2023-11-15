@@ -53,6 +53,12 @@ export const categories = [
     title: 'LIGHT JACKETS',
     category: 'jeans',
   },
+  {
+    id: 4,
+    img: 'https://images.pexels.com/photos/5480696/pexels-photo-5480696.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500',
+    title: 'LIGHT JACKETS',
+    category: 'jeans',
+  },
 ];
 
 export const popularProducts = [

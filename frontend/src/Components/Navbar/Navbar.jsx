@@ -1,7 +1,4 @@
-// import { Badge } from '@mui/material';
-// import { ShoppingCartOutlined, Search } from '@mui/icons-material';
 import * as S from './styles';
-// import { useSelector } from 'react-redux';
 
 import { useState } from 'react';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
@@ -45,11 +42,7 @@ const Navbar = () => {
           </S.StyledLink>
         </S.Center>
         <S.Left>
-          <S.Item>
-            <S.StyledLink className="link" to="/">
-              Início
-            </S.StyledLink>
-          </S.Item>
+          <S.Item></S.Item>
           <S.Item>
             <S.StyledLink className="link" to="/">
               Sobre nós

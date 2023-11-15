@@ -6,17 +6,23 @@ export const Container = styled.div`
   margin: 3px;
   height: 70vh;
   position: relative;
+  /* overflow: hidden; */
 `;
 
 export const Image = styled.img`
   width: 100%;
   height: 100%;
   object-fit: cover;
+  /* filter: hue-rotate(256deg) saturate(118%);
+  -webkit-filter: hue-rotate(256deg) saturate(118%);
+  -moz-filter: hue-rotate(256deg) saturate(118%); */
+  filter: grayscale(50%);
+  clip-path: polygon(25% 0%, 100% 0%, 75% 100%, 0% 100%);
   ${mobile({ height: '20vh' })}
 `;
 
 export const Info = styled.div`
-  position: absolute;
+ position: absolute;
   top: 0;
   left: 0;
   width: 100%;
