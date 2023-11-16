@@ -1,59 +1,35 @@
-import { useState } from 'react';
-import P from 'prop-types';
-import {
-  Arrow,
-  Button,
-  Container,
-  Desc,
-  Image,
-  ImgContainer,
-  InfoContainer,
-  Slide,
-  Title,
-  Wrapper,
-} from './styles';
-import { ArrowLeftOutlined, ArrowRightOutlined } from '@mui/icons-material';
+import Flickity from 'react-flickity-component';
 import { sliderItems } from '../../utils/data';
+import 'flickity/css/flickity.css';
+import { Slide, SlideContent, SliderContainer } from './styles';
+import OptionsShortcuts from '../OptionsShortcuts';
 
-const Slider = () => {
-  const [slideIndex, setSlideIndex] = useState(0);
-  const handleClick = (direction) => {
-    if (direction === 'left') {
-      setSlideIndex(slideIndex > 0 ? slideIndex - 1 : 2);
-    } else {
-      setSlideIndex(slideIndex < 2 ? slideIndex + 1 : 0);
-    }
-  };
-
-  return (
-    <Container>
-      <Arrow direction="left" onClick={() => handleClick('left')}>
-        <ArrowLeftOutlined />
-      </Arrow>
-      <Wrapper slideindex={slideIndex}>
-        {sliderItems.map((item) => (
-          <Slide bg={item.bg} key={item.id}>
-            <InfoContainer>
-              <Title>{item.title}</Title>
-              <Desc>{item.desc}</Desc>
-              <Button>Compre agora</Button>
-            </InfoContainer>
-            <ImgContainer>
-              <Image src={item.img} />
-            </ImgContainer>
-          </Slide>
-        ))}
-      </Wrapper>
-      <Arrow direction="right" onClick={() => handleClick('right')}>
-        <ArrowRightOutlined />
-      </Arrow>
-    </Container>
-  );
+const flickityOptions = {
+  contain: true,
+  wrapAround: true,
 };
 
-Slider.propTypes = {
-  slideIndex: P.number,
-  handleClick: P.func,
+// const slides = [
+//   { id: 1, content: 'Slide 1', bgColor: '#3498db' },
+//   { id: 2, content: 'Slide 2', bgColor: '#e74c3c' },
+//   { id: 3, content: 'Slide 3', bgColor: '#2ecc71' },
+// ];
+
+const Slider = () => {
+  return (
+    <SliderContainer>
+      <OptionsShortcuts />
+      <Flickity options={flickityOptions}>
+        {sliderItems.map((slide) => (
+          <Slide key={slide.id}>
+            <SlideContent>
+              <img src={slide.img} alt={`Slide ${slide.title}`} />
+            </SlideContent>
+          </Slide>
+        ))}
+      </Flickity>
+    </SliderContainer>
+  );
 };
 
 export default Slider;

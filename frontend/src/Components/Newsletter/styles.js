@@ -2,8 +2,7 @@ import styled from 'styled-components';
 import { mobile } from '../../styles/theme';
 
 export const Container = styled.div`
-  height: 60vh;
-  background-color: #fcf5f5;
+  height: 30vh;
   display: flex;
   align-items: center;
   justify-content: center;

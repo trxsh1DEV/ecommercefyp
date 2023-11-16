@@ -1,3 +1,4 @@
+import Newsletter from '../Newsletter/Newsletter';
 import {
   Container,
   Center,
@@ -17,7 +18,7 @@ import {
   Facebook,
   Instagram,
   Twitter,
-  Pinterest,
+  YouTube,
   Room,
   MailOutline,
   Phone,
@@ -25,60 +26,62 @@ import {
 
 const Footer = () => {
   return (
-    <Container>
-      <Left>
-        <Logo>Logo.</Logo>
-        <Desc>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Est
-          consequuntur quam, pariatur accusantium necessitatibus error omnis
-          officia? Atque vel facilis libero fugit ut suscipit eligendi
-          molestiae, doloremque alias, dignissimos earum?
-        </Desc>
-        <SocialContainer>
-          <SocialIcon color="3B5999">
-            <Facebook />
-          </SocialIcon>
-          <SocialIcon color="3B5999">
-            <Instagram />
-          </SocialIcon>
-          <SocialIcon color="3B5999">
-            <Twitter />
-          </SocialIcon>
-          <SocialIcon color="3B5999">
-            <Pinterest />
-          </SocialIcon>
-        </SocialContainer>
-      </Left>
-      <Center>
-        <Title>Useful Links</Title>
-        <List>
-          <ListItem>Home</ListItem>
-          <ListItem>Cart</ListItem>
-          <ListItem>Man Fashion</ListItem>
-          <ListItem>Woman Fashion</ListItem>
-          <ListItem>Accessories</ListItem>
-          <ListItem>My Account</ListItem>
-          <ListItem>Order Tracking</ListItem>
-          <ListItem>Wishlist</ListItem>
-          <ListItem>Wishlist</ListItem>
-          <ListItem>Terms</ListItem>
-        </List>
-      </Center>
-      <Right>
-        <Title>Contact</Title>
-        <ContactItem>
-          <Room style={{ marginRight: '10px' }} /> 622 Dixie Path , South
-          Tobinchester 98336
-        </ContactItem>
-        <ContactItem>
-          <Phone style={{ marginRight: '10px' }} /> +1 234 56 78
-        </ContactItem>
-        <ContactItem>
-          <MailOutline style={{ marginRight: '10px' }} /> contact@lama.dev
-        </ContactItem>
-        <Payment src="https://i.ibb.co/Qfvn4z6/payment.png" />
-      </Right>
-    </Container>
+    <>
+      <Newsletter />
+      <Container>
+        <Left>
+          <Logo>FYP STORE</Logo>
+          <Desc>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Est
+            consequuntur quam, pariatur accusantium necessitatibus error omnis
+            officia? Atque vel facilis libero fugit ut suscipit eligendi
+            molestiae, doloremque alias, dignissimos earum?
+          </Desc>
+          <SocialContainer>
+            <SocialIcon color="3B5999">
+              <Facebook fontSize="large" />
+            </SocialIcon>
+            <SocialIcon color="3B5999">
+              <Instagram fontSize="large" />
+            </SocialIcon>
+            <SocialIcon color="3B5999">
+              <Twitter fontSize="large" />
+            </SocialIcon>
+            <SocialIcon color="3B5999">
+              <YouTube fontSize="large" />
+            </SocialIcon>
+          </SocialContainer>
+        </Left>
+        <Center>
+          <Title>Links rápidos</Title>
+          <List>
+            <ListItem>Home</ListItem>
+            <ListItem>Carrinho</ListItem>
+            <ListItem>Gamers</ListItem>
+            <ListItem>Home Office</ListItem>
+            <ListItem>Periféricoos</ListItem>
+            <ListItem>Minha conta</ListItem>
+            <ListItem>Acompanhe seu pedido</ListItem>
+            <ListItem>Favoritos</ListItem>
+            <ListItem>Nossos Termos</ListItem>
+          </List>
+        </Center>
+        <Right>
+          <Title>Contatos</Title>
+          <ContactItem>
+            <Room style={{ marginRight: '10px' }} /> Rua Los Angeles, 110,
+            06820-490 - SP/BR
+          </ContactItem>
+          <ContactItem>
+            <Phone style={{ marginRight: '10px' }} /> 11 99999-9999
+          </ContactItem>
+          <ContactItem>
+            <MailOutline style={{ marginRight: '10px' }} /> fypstore@fyp.com.br
+          </ContactItem>
+          <Payment src="https://i.ibb.co/Qfvn4z6/payment.png" />
+        </Right>
+      </Container>
+    </>
   );
 };
 

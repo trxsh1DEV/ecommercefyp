@@ -14,6 +14,7 @@ export const theme = {
     blueLight: '#7debf4',
     greenMarin: '#6fdcd3',
     greenLight: '#70efde',
+    greenHack: '#00d107',
     rose: '#d581d8',
     lilas: '#caabfd',
     pink: '#ffb5f7',

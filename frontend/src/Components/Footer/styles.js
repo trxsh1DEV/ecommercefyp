@@ -3,6 +3,7 @@ import { mobile } from '../../styles/theme';
 
 export const Container = styled.div`
   display: flex;
+  flex-wrap: wrap;
   ${mobile({ flexDirection: 'column' })}
 `;
 
@@ -72,5 +73,5 @@ export const ContactItem = styled.div`
 `;
 
 export const Payment = styled.img`
-    width: 50%;
+    width: auto;
 `;

@@ -3,7 +3,7 @@
 export const sliderItems = [
   {
     id: 1,
-    img: 'https://firebasestorage.googleapis.com/v0/b/ecommercefyp-c0173.appspot.com/o/sliderproducts%2FB75-H%20motherboard%201155.png?alt=media&token=677b6aae-729e-4fe9-8b2f-76815c385a43&_gl=1*1n4qm2q*_ga*MTM2NjI4ODg2Mi4xNjk4NTI0NDA4*_ga_CW55HF8NVT*MTY5OTM5NTQxNS41LjEuMTY5OTM5NTc1NC41Mi4wLjA.',
+    img: 'https://cdn.dooca.store/107/files/pla-de-video-2.png?v=1645725879',
     title: '15% OFF',
     desc: 'Confira nossos descontos exclusivos com 15% OFF em Placas mãe',
     bg: '6fdcd3',
@@ -17,7 +17,7 @@ export const sliderItems = [
   },
   {
     id: 3,
-    img: 'https://i.ibb.co/cXFnLLV/3.png',
+    img: 'https://cdn.dooca.store/107/files/cadeira-rgm.png?v=1645705942',
     title: 'LOUNGEWEAR LOVE',
     desc: "DON'T COMPROMISE ON STYLE! GET FLAT 30% OFF FOR NEW ARRIVALS.",
     bg: 'caabfd',
