@@ -11,7 +11,7 @@ export const MenuItem = styled.div`
   cursor: pointer;
   /* border: 1px solid #ccc; */
   padding: 10px;
-  transition: background-color 0.3s ease;
+  transition: background-color .5s ease;
 `;
 
 export const SubMenu = styled.div`
@@ -25,7 +25,7 @@ opacity: 0;
   width: 200px;
   border-radius: 4px;
   overflow: hidden;
-  transition: opacity 0.3s ease, visibility 0.3s ease;
+  transition: opacity .5s ease, visibility .5s ease;
   ${MenuItem}:hover &{
     opacity: 1;
     visibility: visible;
@@ -44,11 +44,11 @@ export const SubmenuList = styled.ul`
 export const SubmenuItem = styled.li`
  padding: 10px;
   border-bottom: 1px solid #ccc;
-  transition: background-color 0.3s ease;
+  transition: background-color .5s ease;
   &:last-child {
     border-bottom: none;
   }
   &:hover {
-    background-color: ${({ theme }) => theme.colors.greenHack};
+    background-color: ${({ theme }) => theme.colors.primaryPurple};
   }
 `;

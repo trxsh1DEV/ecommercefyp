@@ -7,7 +7,7 @@ export const GlobalStyles = createGlobalStyle`
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-size: 1.6rem;
+    font-size: 1.8rem;
     font-family: ${({ theme }) => theme.fonts.family.default};
   }
 

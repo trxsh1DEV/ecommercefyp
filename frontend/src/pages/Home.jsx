@@ -1,6 +1,7 @@
 // import { Announcement } from '../Components/Announcement/Announcement';
 import Categories from '../Components/Categories/Categories';
 import Footer from '../Components/Footer/Footer';
+import MainLinesPc from '../Components/MainLinesPCs';
 import Navbar from '../Components/Navbar/Navbar';
 import Products from '../Components/Products/Products';
 import PublicCustomer from '../Components/ProfileCustomer';
@@ -30,6 +31,7 @@ const Home = () => {
       </div>
       <PublicCustomer />
       <Categories />
+      <MainLinesPc />
       <Products />
       <Footer />
     </>

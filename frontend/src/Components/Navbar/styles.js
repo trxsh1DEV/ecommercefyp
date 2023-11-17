@@ -21,9 +21,7 @@ export const Wrapper = styled.div`
 export const Item = styled.div`
   display: flex;
   align-items: center;
-  font-size: 18px;
   position: relative;
-  padding-bottom: 5px;
 
   &::after {
     content: '';
@@ -65,6 +63,7 @@ export const Center = styled.div`
 export const Left = styled.div`
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 25px;
 `;
 

@@ -24,38 +24,28 @@ export const sliderItems = [
   },
 ];
 
-// sliderItems.propTypes = P.arrayOf(
-//   P.shape({
-//     id: P.number.isRequired,
-//     img: P.string.isRequired,
-//     title: P.string.isRequired,
-//     desc: P.string.isRequired,
-//     bg: P.string.isRequired,
-//   }),
-// );
-
 export const categories = [
   {
     id: 1,
-    img: 'https://images.pexels.com/photos/5886041/pexels-photo-5886041.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940',
+    img: 'https://source.unsplash.com/random/800x800/?technology',
     title: 'Teclado Gamer',
     category: 'teclado',
   },
   {
     id: 2,
-    img: 'https://images.pexels.com/photos/2983464/pexels-photo-2983464.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940',
+    img: 'https://source.unsplash.com/random/800x800/?tech',
     title: 'Mouse Gamer',
     category: 'mouse',
   },
   {
     id: 3,
-    img: 'https://images.pexels.com/photos/5480696/pexels-photo-5480696.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500',
+    img: 'https://source.unsplash.com/random/800x800/?computer',
     title: 'LIGHT JACKETS',
     category: 'jeans',
   },
   {
     id: 4,
-    img: 'https://images.pexels.com/photos/5480696/pexels-photo-5480696.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500',
+    img: 'https://source.unsplash.com/random/800x800/?futurist',
     title: 'LIGHT JACKETS',
     category: 'jeans',
   },
@@ -93,5 +83,28 @@ export const popularProducts = [
   {
     id: 8,
     img: 'https://www.pngarts.com/files/3/Women-Jacket-PNG-High-Quality-Image.png',
+  },
+];
+
+export const MainLinesPcData = [
+  {
+    icon: 'uva.svg',
+    text: 'Mamae comprou',
+  },
+  {
+    icon: 'apple.svg',
+    text: 'Baguncinha',
+  },
+  {
+    icon: 'fig.svg',
+    text: 'Meia bomba',
+  },
+  {
+    icon: 'pera.svg',
+    text: 'Pae tá fuerte',
+  },
+  {
+    icon: 'pitaia.svg',
+    text: 'Mar brabo',
   },
 ];
