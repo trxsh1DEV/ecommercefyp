@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-import { Container, Items, Text, Image } from './styles';
-import { StarBorder } from '@mui/icons-material';
+import './style.css';
 import { MainLinesPcData } from '../../utils/data';
 
 const MainLinesPc: React.FC = () => {
@@ -10,18 +9,18 @@ const MainLinesPc: React.FC = () => {
     setActiveItem(index);
   };
   return (
-    <Container>
+    <section className="line-products">
       {MainLinesPcData.map((data, index) => (
-        <Items
+        <div
           key={index}
+          className={`card ${activeItem === index ? 'active' : ''}`}
           onClick={() => handleItemClick(index)}
-          className={activeItem === index ? 'active' : ''}
         >
-          <Image src={data.icon} alt="" />
-          <Text>{data.text}</Text>
-        </Items>
+          <img className="img-line-products" src={data.icon} alt={data.text} />
+          <span className="span-line-products">{data.text}</span>
+        </div>
       ))}
-    </Container>
+    </section>
   );
 };
 

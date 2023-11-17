@@ -18,6 +18,7 @@ export const theme = {
     rose: '#d581d8',
     lilas: '#caabfd',
     pink: '#ffb5f7',
+    white: '#fff',
   },
   fonts: {
     family: {

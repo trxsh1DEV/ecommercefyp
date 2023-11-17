@@ -16,8 +16,8 @@ export const GlobalStyles = createGlobalStyle`
   }
 
   body {
-    font-size: 1.6rem;
-
+    background: #212534;
+    color: ${({ theme }) => theme.colors.white};
   }
 
   h1, h2, h3, h4, h5, h6{
