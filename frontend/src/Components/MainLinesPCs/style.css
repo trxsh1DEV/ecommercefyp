@@ -45,7 +45,7 @@
   position: absolute;
   z-index: -1;
   top: -1%;
-  left: -2%;
+  /* left: -2%; */
   animation: spin 2.5s linear infinite;
 }
 

@@ -15,7 +15,7 @@ class UserController {
 
       const users = query
         ? await UserModel.find().sort({ _id: -1 }).limit(10)
-        : await UserModel.find({}, 'username email id');
+        : await UserModel.find({}, 'username email id isAdmin');
       return res.status(200).json(users);
     } catch (err) {
       return res.status(500).json({
@@ -26,7 +26,8 @@ class UserController {
 
   async show(req, res) {
     try {
-      const user = await UserModel.findById(req.userId);
+      // const user = await UserModel.findById(req.userId);
+      const user = await UserModel.findById(req.params.id);
       if (!user) {
         return res.status(400).json('Usuario não encontrado');
       }
@@ -107,6 +108,7 @@ class UserController {
   }
 
   async stats(req, res) {
+    console.log('oi');
     const date = new Date();
     const lastYear = new Date(date.setFullYear(date.getFullYear() - 1));
 

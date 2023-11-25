@@ -12,13 +12,17 @@ import Product from "./pages/product/Product";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import PermissionDenied from "./pages/noAccess/PermissionDenied";
 import Charts from "./pages/analytics/Charts";
+import { useSelector } from "react-redux";
 
 const queryClient = new QueryClient();
 function App() {
-  const storageData = localStorage.getItem("persist:root");
-  const isAdmin: boolean = storageData
-    ? JSON.parse(JSON.parse(storageData).user).currentUser.token
-    : false;
+  // const storageData = localStorage.getItem("persist:root");
+  // const isAdmin: boolean = storageData
+  //   ? JSON.parse(JSON.parse(storageData).user).currentUser?.token
+  //   : false;
+  const isAdmin = useSelector(
+    (state: any) => state.user.currentUser?.others?.isAdmin
+  );
 
   const Layout = () => {
     return isAdmin ? (

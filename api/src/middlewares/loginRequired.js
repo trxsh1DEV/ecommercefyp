@@ -14,9 +14,11 @@ export default async (req, res, next) => {
   const [, token] = authorization.split(' ');
 
   try {
-    const data = jwt.verify(token, process.env.TOKEN_SECRET);
-    const { id, email } = data;
+    // const data = jwt.verify(token, process.env.TOKEN_SECRET);
+    // const { id, email } = data;
 
+    const data = jwt.verify(token, process.env.TOKEN_SECRET);
+    const { id, mail: email } = data;
     const user = await User.findOne({ _id: id, email });
     // console.log(user);
 

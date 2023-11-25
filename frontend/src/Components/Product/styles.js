@@ -15,19 +15,20 @@ export const Info = styled.div`
   transition: all 0.5s ease;
   cursor: pointer;
 `;
-
+// TODO: Tenho que criar um Items, para que o container apenas fique em volta de todos os meus itens e eu tenha um control melhor
 export const Container = styled.div`
   flex: 1;
   margin: 5px;
-  min-width: 280px;
+  /* min-width: 0; Set min-width to 0 to allow it to grow */
   height: 350px;
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   justify-content: center;
-  background-color: #f5fbfd;
+  background-color: transparent;
   position: relative;
 
-  &:hover ${Info}{
+  &:hover ${Info} {
     opacity: 1;
   }
 `;

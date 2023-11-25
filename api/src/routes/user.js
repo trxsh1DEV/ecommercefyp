@@ -6,7 +6,7 @@ import tokenAndAdmin from '../middlewares/tokenAndAdmin';
 const router = new Router();
 
 router.get('/all', tokenAndAdmin, userController.index);
-router.get('/', loginRequired, userController.show);
+router.get('/get/:id', loginRequired, userController.show);
 router.get('/stats', tokenAndAdmin, userController.stats);
 
 router.put('/', loginRequired, userController.update);

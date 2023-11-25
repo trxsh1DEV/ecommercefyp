@@ -63,8 +63,9 @@ export const updateProduct = async (
 
 export const addProduct = async (product: Product, dispatch: Dispatch) => {
   dispatch(addProductStart());
+  // console.log(product);
   try {
-    const res = await userRequest.post(`/products`, product);
+    const res = await userRequest.post(`/products`, product); //caso ocorra um erro aq ao criar prod lembre-se q o title tem q ter no minimo 4 letras
     dispatch(addProductSuccess(res.data));
   } catch (err) {
     dispatch(addProductFailure());

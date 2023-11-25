@@ -2,6 +2,7 @@ import jwt from 'jsonwebtoken';
 
 export default (req, res, next) => {
   const { authorization } = req.headers;
+  console.log('oi', req.headers);
 
   if (!authorization) {
     return res.status(401).json({
