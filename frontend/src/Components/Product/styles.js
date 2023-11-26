@@ -2,12 +2,13 @@ import styled from 'styled-components';
 
 export const Info = styled.div`
   opacity: 0;
+  /* width: calc(100% - 20px); */
   width: 100%;
-  height: 100%;
+  height: 280px;
   position: absolute;
-  top: 0;
-  left: 0;
-  background-color: rgba(0, 0, 0, 0.2);
+  /* top: 10px; */
+  /* left: 0; */
+  background-color: rgba(0, 0, 0, 0.3);
   z-index: 3;
   display: flex;
   align-items: center;
@@ -15,17 +16,12 @@ export const Info = styled.div`
   transition: all 0.5s ease;
   cursor: pointer;
 `;
-// TODO: Tenho que criar um Items, para que o container apenas fique em volta de todos os meus itens e eu tenha um control melhor
+
 export const Container = styled.div`
-  flex: 1;
-  margin: 5px;
-  /* min-width: 0; Set min-width to 0 to allow it to grow */
-  height: 350px;
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: center;
-  background-color: transparent;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  place-items: center;
+  padding: 10px 0px;
   position: relative;
 
   &:hover ${Info} {
@@ -39,11 +35,14 @@ export const Circle = styled.div`
   border-radius: 50%;
   background-color: white;
   position: absolute;
+  visibility: hidden;
 `;
 
 export const Image = styled.img`
-  height: 75%;
+  height: 280px;
+  max-width: 280px;
   z-index: 2;
+  object-fit: cover;
 `;
 
 export const Icon = styled.div`

@@ -10,7 +10,7 @@ class ProductController {
       let query = Product.find().sort({ createdAt: -1 }); // Consulta base
 
       if (qNew) {
-        query = query.sort({ createdAt: -1 }).limit(1);
+        query = query.sort({ createdAt: -1 }).limit(5);
       }
 
       if (qCategory) {

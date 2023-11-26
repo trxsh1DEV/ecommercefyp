@@ -5,48 +5,58 @@
 }
 
 :root {
-  /* --card-height: 15vh; */
+  --card-height: 15vh;
   /* --card-width: calc(var(--card-height) / 1.5); */
-  --card-width: 280px;
+  --card-width: 220px;
 }
 
 .line-products {
   display: flex;
   justify-content: center;
-  height: 15vh;
+  flex-wrap: wrap;
+  /* height: 15vh; */
+  max-width: 100vw;
 }
 
 
 .card {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+
   background: #191c29;
-  width: var(--card-width);
-  /* height: var(--card-height); */
+  min-width: var(--card-width);
+  max-width: 17%;
+  height: var(--card-height);
   padding: 3px;
   position: relative;
   border-radius: 6px;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  display: flex;
+
   font-size: 1.5em;
   color: rgb(88 199 250 / 0%);
   cursor: pointer;
   margin-right: 20px;
+  margin-bottom: 15px;
   transition: all 400ms ease-in;
+
 }
 
 .card::before {
-  z-index: -1;
+  max-width: 99vw;
+  z-index: -1 !important;
   content: "";
-  width: 104%;
-  height: 102%;
+  /* width: 102%; */
+  /* height: 102%; */
   border-radius: 8px;
   background-image: linear-gradient(var(--rotate), #5ddcff, #3c67e3 43%, #4e00c2);
   position: absolute;
-  z-index: -1;
   top: -1%;
-  /* left: -2%; */
+  left: -1%;
+  right: -1%;
+  bottom: -1%;
   animation: spin 2.5s linear infinite;
+  overflow: hidden;
 }
 
 .active {
@@ -73,3 +83,7 @@
   width: 30%;
   max-width: 100%;
 }
+
+/* @media screen and (max-width: 1220px) {
+  .card {}
+} */
