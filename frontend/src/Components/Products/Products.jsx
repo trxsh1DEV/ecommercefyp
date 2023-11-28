@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import Product from '../Product/Product';
-import { Container } from './styles';
+import { Container, TextContainer } from './styles';
 import P from 'prop-types';
 import axios from 'axios';
 import { config } from '../../utils/requestMethods';
@@ -56,13 +56,18 @@ const Products = ({ category, filters, sort }) => {
   }, [category, filters, products, sort]);
 
   return (
-    <Container>
-      {category
-        ? filteredProducts.map((item) => <Product item={item} key={item._id} />)
-        : products
-            .slice(0, 12)
-            .map((item) => <Product item={item} key={item._id} />)}
-    </Container>
+    <>
+      <TextContainer>Mais Populares</TextContainer>
+      <Container>
+        {category
+          ? filteredProducts.map((item) => (
+              <Product item={item} key={item._id} />
+            ))
+          : products
+              .slice(0, 12)
+              .map((item) => <Product item={item} key={item._id} />)}
+      </Container>
+    </>
   );
 };
 

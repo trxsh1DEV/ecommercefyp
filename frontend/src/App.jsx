@@ -14,7 +14,7 @@ import NotFound from './pages/NotFound/NotFound';
 import { useSelector } from 'react-redux';
 
 const App = () => {
-  const user = useSelector((state) => state.user.currentUser); // Defina sua lógica de autenticação aqui
+  const user = useSelector((state) => state.user.currentUser);
   return (
     <BrowserRouter>
       <ThemeProvider theme={theme}>

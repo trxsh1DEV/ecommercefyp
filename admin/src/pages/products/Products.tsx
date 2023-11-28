@@ -1,7 +1,7 @@
 import { useState } from "react";
 import "./Products.scss";
 import DataTable from "../../components/dataTable/DataTable";
-import Add from "../../components/add/Add";
+import Add from "../../components/addProduct/Add.js";
 import { GridColDef } from "@mui/x-data-grid";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
@@ -9,7 +9,7 @@ import { getProducts } from "../../redux/apiCalls.js";
 import { RootState } from "../../redux/types.js";
 
 const columns: GridColDef[] = [
-  { field: "_id", headerName: "ID", width: 110 },
+  { field: "_id", headerName: "ID", width: 50 },
   {
     field: "image",
     headerName: "Imagem",
@@ -19,9 +19,8 @@ const columns: GridColDef[] = [
     },
   },
   { field: "title", headerName: "Title", width: 200 },
-  { field: "color", headerName: "Color", width: 170 },
   { field: "price", headerName: "Price (R$)", width: 160 },
-  { field: "ww", headerName: "Producer", width: 200 },
+  { field: "ww", headerName: "Producer", width: 150 },
   { field: "createdAt", headerName: "createdAt", width: 200 },
   { field: "inStock", headerName: "Stock", width: 150, type: "boolean" },
 ];

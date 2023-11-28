@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, ChangeEvent } from "react";
 import { GridColDef } from "@mui/x-data-grid";
 import "./add.scss";
 import {
@@ -17,6 +17,15 @@ type Props = {
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
+type AddProduct = {
+  title: string;
+  price: number;
+  description: string;
+  categories: string[];
+  image: string;
+  inStock: boolean;
+};
+
 const Add: React.FC<Props> = (props: Props) => {
   const [inputs, setInputs] = useState<any>({});
   const [file, setFile] = useState<File | null>(null);
@@ -25,7 +34,7 @@ const Add: React.FC<Props> = (props: Props) => {
   const dispatch = useDispatch();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setInputs((prev) => {
+    setInputs((prev: AddProduct) => {
       return { ...prev, [e.target.name]: e.target.value };
     });
   };
@@ -101,6 +110,16 @@ const Add: React.FC<Props> = (props: Props) => {
     props.setOpen(false);
   };
 
+  const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files.length) {
+      setFile(e.target.files[0]);
+    }
+  };
+
+  const handleSelectChange = (e: ChangeEvent<HTMLSelectElement>) => {
+    return e.target.value;
+  };
+
   return (
     <div className="add">
       <div className="modal">
@@ -130,25 +149,17 @@ const Add: React.FC<Props> = (props: Props) => {
               onChange={handleCategories}
             />
           </div>
-          {/* <div className="item">
-            <label>Color</label>
-            <input
-              name="color"
-              type="text"
-              placeholder="black,white"
-              onChange={handleCategories}
-            />
-          </div> */}
           <div className="item">
             <label>Imagem</label>
             <input
               name="image"
               type="file"
-              onChange={(e) => setFile(e.target.files[0])}
+              onChange={handleFileChange}
+              accept="image/*"
             />
           </div>
           <div className="item">
-            <select name="inStock" id="" onChange={handleChange}>
+            <select name="inStock" id="" onChange={handleSelectChange}>
               <option value="true">Sim</option>
               <option value="false">Não</option>
             </select>
