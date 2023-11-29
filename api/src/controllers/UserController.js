@@ -108,7 +108,6 @@ class UserController {
   }
 
   async stats(req, res) {
-    console.log('oi');
     const date = new Date();
     const lastYear = new Date(date.setFullYear(date.getFullYear() - 1));
 

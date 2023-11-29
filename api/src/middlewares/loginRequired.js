@@ -2,7 +2,6 @@ import jwt from 'jsonwebtoken';
 import User from '../models/User';
 
 export default async (req, res, next) => {
-  console.log(req.headers);
   const { authorization } = req.headers;
 
   if (!authorization) {
@@ -20,7 +19,6 @@ export default async (req, res, next) => {
     const data = jwt.verify(token, process.env.TOKEN_SECRET);
     const { id, mail: email } = data;
     const user = await User.findOne({ _id: id, email });
-    // console.log(user);
 
     if (!user) {
       return res.status(401).json({
@@ -30,7 +28,6 @@ export default async (req, res, next) => {
 
     req.userId = id;
     req.userEmail = email;
-    // req.userIsAdmin = isAdmin;
     return next();
   } catch (err) {
     return res.status(403).json({

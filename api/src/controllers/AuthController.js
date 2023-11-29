@@ -76,6 +76,18 @@ class AuthController {
       });
     }
   }
+
+  // async logout(req, res) {
+  //   try {
+  //     let { authorization } = req.headers;
+  //     authorization = null;
+  //     return res.status(200).json({ logout: 'success' });
+  //   } catch (err) {
+  //     return res.status(200).json({
+  //       errors: ['Falha ao realizar logout', err.message],
+  //     });
+  //   }
+  // }
 }
 
 export default new AuthController();

@@ -1,8 +1,8 @@
 import jwt from 'jsonwebtoken';
+import User from '../models/User';
 
-export default (req, res, next) => {
+export default async (req, res, next) => {
   const { authorization } = req.headers;
-  console.log('oi', req.headers);
 
   if (!authorization) {
     return res.status(401).json({

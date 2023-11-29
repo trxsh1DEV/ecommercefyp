@@ -23,3 +23,5 @@ export interface RootState {
   // user: UserState;
   // Outros estados, se houverem
 }
+
+export type Users = {};

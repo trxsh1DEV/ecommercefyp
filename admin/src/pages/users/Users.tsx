@@ -3,7 +3,8 @@ import DataTable from "../../components/dataTable/DataTable";
 import "./Users.scss";
 import { useState } from "react";
 import Add from "../../components/addProduct/Add";
-import { userRows } from "../../data";
+// import { userRows } from "../../data";
+import { get } from "../../redux/apiCalls.js";
 // import { useQuery } from "@tanstack/react-query";
 
 const columns: GridColDef[] = [
@@ -56,6 +57,8 @@ const columns: GridColDef[] = [
 
 const Users = () => {
   const [open, setOpen] = useState(false);
+
+  // TODO: Doing function of management users using good pratics for forms, erroBoundaries and typescript
 
   // TEST THE API
 

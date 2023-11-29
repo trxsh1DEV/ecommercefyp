@@ -21,11 +21,12 @@ function App() {
   //   ? JSON.parse(JSON.parse(storageData).user).currentUser?.token
   //   : false;
   const isAdmin = useSelector(
-    (state: any) => state.user.currentUser?.others?.isAdmin
+    (state: any) => state.user?.currentUser?.others.isAdmin
   );
+  const user = useSelector((state: any) => state.user?.currentUser);
 
   const Layout = () => {
-    return isAdmin ? (
+    return isAdmin && user ? (
       <div className="main">
         <Navbar />
         <div className="container">
@@ -43,6 +44,10 @@ function App() {
     ) : (
       <PermissionDenied />
     );
+  };
+
+  const LoginRoute = () => {
+    return user ? (window.location.href = "/") : <Login />;
   };
 
   const router = createBrowserRouter([
@@ -82,7 +87,7 @@ function App() {
     },
     {
       path: "/login",
-      element: <Login />,
+      element: <LoginRoute />,
     },
   ]);
 

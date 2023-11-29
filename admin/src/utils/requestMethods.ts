@@ -1,19 +1,19 @@
 import axios from "axios";
 
-interface LocalStorageData {
-  user: {
-    currentUser: {
-      token: string;
-    };
-  };
-}
+// interface LocalStorageData {
+//   user: {
+//     currentUser: {
+//       token: string;
+//     };
+//   };
+// }
 
 // Tente obter os dados do localStorage e realizar a análise do JSON
 const localStorageData = JSON.parse(
   localStorage.getItem("persist:root") || "null"
 );
 
-const BASE_URL = "http://localhost:5123/api/";
+export const BASE_URL = "http://localhost:5123/api/";
 
 // Verifica se `localStorageData` não é nulo e se possui a estrutura correta
 const TOKEN: string =
