@@ -17,11 +17,21 @@ export interface ProductState {
   _id: string;
   // Outras propriedades do estado, se houverem
 }
+export interface UserState {
+  users: Users[];
+  _id: string;
+  // Outras propriedades do estado, se houverem
+}
 
 export interface RootState {
   product: ProductState;
-  // user: UserState;
+  users: UserState;
   // Outros estados, se houverem
 }
 
-export type Users = {};
+export type Users = {
+  username: string;
+  email: string;
+  isAdmin: boolean;
+  _id: string;
+};

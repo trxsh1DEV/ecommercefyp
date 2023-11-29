@@ -7,6 +7,7 @@ import cartRoutes from './src/routes/cart';
 import orderRoutes from './src/routes/order';
 import stripe from './src/routes/stripe';
 import cors from 'cors';
+import delay from 'express-delay';
 
 class App {
   constructor() {
@@ -19,6 +20,7 @@ class App {
     this.app.use(cors());
     this.app.use(express.urlencoded({ extended: true }));
     this.app.use(express.json());
+    this.app.use(delay(3000));
   }
 
   routes() {

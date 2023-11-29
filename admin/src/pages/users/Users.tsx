@@ -1,92 +1,53 @@
-import { GridColDef } from "@mui/x-data-grid";
-import DataTable from "../../components/dataTable/DataTable";
-import "./Users.scss";
-import { useState } from "react";
-import Add from "../../components/addProduct/Add";
-// import { userRows } from "../../data";
-import { get } from "../../redux/apiCalls.js";
-// import { useQuery } from "@tanstack/react-query";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { getUser } from "../../redux/apiCalls"; // Substitua pelo caminho correto do seu arquivo de ações
+import { RootState } from "../../redux/types";
+import {
+  getUserSuccess,
+  getUserStart,
+  getUserFailure,
+} from "../../redux/usersRedux";
+import Loading from "../../components/Loading/index";
 
-const columns: GridColDef[] = [
-  { field: "id", headerName: "ID", width: 90 },
-  {
-    field: "img",
-    headerName: "Avatar",
-    width: 100,
-    renderCell: (params) => {
-      return <img src={params.row.img || "/noavatar.png"} alt="" />;
-    },
-  },
-  {
-    field: "firstName",
-    type: "string",
-    headerName: "First name",
-    width: 150,
-  },
-  {
-    field: "lastName",
-    type: "string",
-    headerName: "Last name",
-    width: 150,
-  },
-  {
-    field: "email",
-    type: "string",
-    headerName: "Email",
-    width: 200,
-  },
-  {
-    field: "phone",
-    type: "string",
-    headerName: "Phone",
-    width: 200,
-  },
-  {
-    field: "createdAt",
-    headerName: "Created At",
-    width: 200,
-    type: "string",
-  },
-  {
-    field: "verified",
-    headerName: "Verified",
-    width: 150,
-    type: "boolean",
-  },
-];
+const UserComponent = () => {
+  const dispatch = useDispatch();
+  const users = useSelector((state: RootState) => state.users.users);
+  const isFetching = useSelector((state: any) => state.users.isFetching);
 
-const Users = () => {
-  const [open, setOpen] = useState(false);
+  useEffect(() => {
+    const fetchData = async () => {
+      dispatch(getUserStart());
+      try {
+        const res = await getUser(dispatch);
+        if (res && res.data) {
+          // Atualiza o estado local apenas se a resposta contiver dados
+          dispatch(getUserSuccess(res.data));
+        }
+      } catch (err) {
+        dispatch(getUserFailure());
+        console.error("erro", err);
+      }
+    };
 
-  // TODO: Doing function of management users using good pratics for forms, erroBoundaries and typescript
-
-  // TEST THE API
-
-  // const { isLoading, data } = useQuery({
-  //   queryKey: ["allusers"],
-  //   queryFn: () =>
-  //     fetch("http://localhost:8800/api/users").then(
-  //       (res) => res.json()
-  //     ),
-  // });
+    fetchData();
+  }, [dispatch]);
 
   return (
-    <div className="users">
-      <div className="info">
-        <h1>Users</h1>
-        <button onClick={() => setOpen(true)}>Add New User</button>
-      </div>
-      <DataTable slug="users" columns={columns} rows={userRows} />
-      {/* TEST THE API */}
-
-      {/* {isLoading ? (
-        "Loading..."
+    <div>
+      <h2>Lista de Usuários</h2>
+      {isFetching ? (
+        <Loading />
       ) : (
-        <DataTable slug="users" columns={columns} rows={data} />
-      )} */}
-      {open && <Add slug="user" columns={columns} setOpen={setOpen} />}
+        <ul>
+          {users.map((user) => (
+            <li key={user._id}>
+              {user.username} - {user.email}
+            </li>
+          ))}
+        </ul>
+      )}
     </div>
   );
 };
 
-export default Users;
+export default UserComponent;

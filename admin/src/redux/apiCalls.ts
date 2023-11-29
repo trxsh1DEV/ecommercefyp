@@ -15,7 +15,8 @@ import {
   addProductSuccess,
   addProductFailure,
 } from "./productRedux";
-import { Product } from "./types";
+import { getUserFailure, getUserStart, getUserSuccess } from "./usersRedux";
+import { Product, Users } from "./types";
 
 export const login = async (dispatch: Dispatch, user: any) => {
   dispatch(loginStart());
@@ -69,5 +70,16 @@ export const addProduct = async (product: Product, dispatch: Dispatch) => {
     dispatch(addProductSuccess(res.data));
   } catch (err) {
     dispatch(addProductFailure());
+  }
+};
+
+export const getUser = async (dispatch: Dispatch) => {
+  dispatch(getUserStart());
+  try {
+    const res = await userRequest.get("/users/all");
+    dispatch(getUserSuccess(res.data as Users[]));
+    return res;
+  } catch (err) {
+    dispatch(getUserFailure());
   }
 };
