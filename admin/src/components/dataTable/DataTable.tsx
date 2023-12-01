@@ -2,9 +2,9 @@ import { useState } from "react";
 import { DataGrid, GridColDef, GridToolbar } from "@mui/x-data-grid";
 import "./dataTable.scss";
 import { Link } from "react-router-dom";
-import { deleteProduct } from "../../redux/apiCalls";
+import { deleteProduct, deleteUser } from "../../redux/apiCalls";
 import { useDispatch } from "react-redux";
-import Modal from "../../pages/testPage/Edit"; // Importe o seu modal aqui
+import EditProduct from "../../pages/Edit/Edit"; // Importe o seu modal aqui
 
 type Props = {
   columns: GridColDef[];
@@ -18,12 +18,27 @@ const DataTable = (props: Props) => {
   const [productId, setProductId] = useState("");
 
   const handleDelete = (id: string) => {
-    deleteProduct(id, dispatch);
+    if (!id) return;
+
+    switch (props.slug) {
+      case "users":
+        deleteUser(id, dispatch);
+        break;
+
+      case "products":
+        deleteProduct(id, dispatch);
+        break;
+    }
   };
 
-  const handleEdit = (id: string) => {
+  const handleEditProduct = (id: string) => {
     setIsModalOpen(true);
     setProductId(id); // Defina productId aqui
+  };
+
+  const handleEditUser = (id: string) => {
+    setIsModalOpen(true);
+    console.log(id, "oi"); // Defina productId aqui
   };
 
   const actionColumn: GridColDef = {
@@ -34,11 +49,24 @@ const DataTable = (props: Props) => {
       return (
         <div className="action">
           <Link to={`/${props.slug}/${params.row._id}`}>
-            <img src="/view2.svg" alt="" />
+            <img src="/edit.svg" alt="" />
           </Link>
-          <div className="edit" onClick={() => handleEdit(params.row._id)}>
-            <img src="/view.svg" alt="" />
-          </div>
+
+          {props.slug === "users" ? (
+            <div
+              className="edit"
+              onClick={() => handleEditUser(params.row._id)}
+            >
+              <img src="/view.svg" alt="" />
+            </div>
+          ) : (
+            <div
+              className="edit"
+              onClick={() => handleEditProduct(params.row._id)}
+            >
+              <img src="/view.svg" alt="" />
+            </div>
+          )}
           <div className="delete" onClick={() => handleDelete(params.row._id)}>
             <img src="/delete.svg" alt="" />
           </div>
@@ -74,13 +102,16 @@ const DataTable = (props: Props) => {
         disableDensitySelector
         disableColumnSelector
       />
-      {isModalOpen && (
-        <Modal
-          isOpen={isModalOpen}
-          onClose={() => setIsModalOpen(false)}
-          productId={productId}
-        />
-      )}
+      {isModalOpen &&
+        (props.slug === "users" ? (
+          <div>asd</div>
+        ) : (
+          <EditProduct
+            isOpen={isModalOpen}
+            onClose={() => setIsModalOpen(false)}
+            productId={productId}
+          />
+        ))}
     </div>
   );
 };

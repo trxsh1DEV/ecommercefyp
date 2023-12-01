@@ -20,7 +20,7 @@ const columns: GridColDef[] = [
   },
   { field: "title", headerName: "Title", width: 200 },
   { field: "price", headerName: "Price (R$)", width: 160 },
-  { field: "ww", headerName: "Producer", width: 150 },
+  { field: "producer", headerName: "Producer", width: 150 },
   { field: "createdAt", headerName: "createdAt", width: 200 },
   { field: "inStock", headerName: "Stock", width: 150, type: "boolean" },
 ];

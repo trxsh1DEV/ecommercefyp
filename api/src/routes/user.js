@@ -6,10 +6,10 @@ import tokenAndAdmin from '../middlewares/tokenAndAdmin';
 const router = new Router();
 
 router.get('/all', tokenAndAdmin, userController.index);
-router.get('/get/:id', loginRequired, userController.show);
+router.get('/get/:id', tokenAndAdmin, userController.show);
 router.get('/stats', tokenAndAdmin, userController.stats);
-
-router.put('/', loginRequired, userController.update);
-router.delete('/', loginRequired, userController.delete);
+router.post('/store', tokenAndAdmin, userController.register);
+router.put('/', tokenAndAdmin, userController.update);
+router.delete('/:id', tokenAndAdmin, userController.delete);
 
 export default router;

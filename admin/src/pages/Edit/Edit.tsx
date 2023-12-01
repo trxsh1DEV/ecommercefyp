@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import "./edit.scss"; // Estilize este arquivo CSS conforme desejado
+import "./edit.scss";
 import { userRequest } from "../../utils/requestMethods";
 import { Product } from "../../redux/types";
 import { useDispatch } from "react-redux";
