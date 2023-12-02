@@ -16,12 +16,13 @@ const columns: GridColDef[] = [
     renderCell: (params: any) => {
       return <img src={params.row.avatar || "/noavatar.png"} alt="" />;
     },
+    type: "file",
   },
   {
     field: "username",
     type: "string",
     headerName: "Username",
-    width: 130,
+    width: 150,
   },
   {
     field: "email",
@@ -29,13 +30,11 @@ const columns: GridColDef[] = [
     headerName: "Email",
     width: 150,
   },
+
   {
     field: "isAdmin",
     type: "boolean",
-    // renderCell: () => {
-    //   return <input type="checkbox" />;
-    // },
-    headerName: "IsAdmin?",
+    headerName: "Is Admin",
     width: 120,
   },
   {
@@ -47,7 +46,7 @@ const columns: GridColDef[] = [
   {
     field: "createdAt",
     headerName: "Created At",
-    width: 140,
+    width: 120,
     type: "string",
   },
   {

@@ -11,8 +11,14 @@ type Props = {
 };
 
 const Add = (props: Props) => {
-  const [inputs, setInputs] = useState<any>({});
+  const randomFunc = () => {
+    return "45573475Ygo-";
+  };
   const dispatch = useDispatch();
+  const [inputs, setInputs] = useState<any>({
+    password: randomFunc(),
+    isAdmin: false, // Novo campo para representar o checkbox
+  });
 
   const passwordColumn: GridColDef = {
     field: "password",
@@ -20,7 +26,6 @@ const Add = (props: Props) => {
     headerName: "Password",
   };
 
-  // Criar uma cópia das colunas originais e adicionar o campo password
   const columnsWithPassword = [...props.columns, passwordColumn];
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -35,8 +40,13 @@ const Add = (props: Props) => {
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value, type, checked } = e.target;
+
     setInputs((prev: Props) => {
-      return { ...prev, [e.target.name]: e.target.value };
+      // Se o tipo for checkbox, use o valor booleano
+      const newValue = type === "checkbox" ? checked : value;
+
+      return { ...prev, [name]: newValue };
     });
   };
 
@@ -52,19 +62,28 @@ const Add = (props: Props) => {
             .filter(
               (item) =>
                 item.field !== "id" &&
-                item.field !== "avatar" &&
                 item.field !== "createdAt" &&
-                item.field !== "verified"
+                item.field !== "verified" &&
+                item.field !== "password"
             )
             .map((column) => (
               <div className="item" key={column.field}>
                 <label>{column.headerName}</label>
-                <input
-                  type={column.type}
-                  placeholder={column.field}
-                  onChange={handleChange}
-                  name={column.field}
-                />
+                {column.type === "boolean" ? (
+                  <input
+                    type="checkbox"
+                    checked={inputs[column.field]}
+                    onChange={handleChange}
+                    name={column.field}
+                  />
+                ) : (
+                  <input
+                    type={column.type}
+                    placeholder={column.field}
+                    onChange={handleChange}
+                    name={column.field}
+                  />
+                )}
               </div>
             ))}
           <button type="submit">Send</button>

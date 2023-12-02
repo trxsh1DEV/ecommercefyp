@@ -105,6 +105,7 @@ export const deleteUser = async (id: string, dispatch: Dispatch) => {
 
 export const addUser = async (user: Users, dispatch: Dispatch) => {
   dispatch(userAddStart());
+  // console.log(user);
   try {
     const res = await userRequest.post(`/users/store`, user);
     dispatch(userAddSuccess(res.data));

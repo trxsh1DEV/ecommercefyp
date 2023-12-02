@@ -30,21 +30,13 @@ class UserController {
 
   async register(req, res) {
     const newUser = new UserModel(req.body);
-    // console.log(newUser);
 
     try {
-      console.log('oi');
       const savedUser = await newUser.save();
-      console.log(savedUser);
       const { username, email, id } = savedUser;
       return res.status(201).json({ username, email, id });
     } catch (err) {
-      console.log('oi');
       let removeContent = err.message.indexOf(':');
-
-      // return res.status(400).json({
-      //   errors: [err.message.split(', ')],
-      // });
 
       removeContent !== -1
         ? (removeContent = err.message

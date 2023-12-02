@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { DataGrid, GridColDef, GridToolbar } from "@mui/x-data-grid";
 import "./dataTable.scss";
 import { Link } from "react-router-dom";
@@ -12,10 +12,44 @@ type Props = {
   slug: string;
 };
 
+// type RowsType = {
+//   _id: string;
+//   avatar: string;
+//   username: string;
+//   email: string;
+//   isAdmin: boolean;
+//   telephone: string;
+//   verified: boolean;
+//   createdAt: Date;
+//   id: string;
+// };
+
 const DataTable = (props: Props) => {
   const dispatch = useDispatch();
   const [isModalOpen, setIsModalOpen] = useState(false); // Estado para controlar a abertura do modal
   const [productId, setProductId] = useState("");
+  const [formattedRows, setFormattedRows] = useState<object[]>([]);
+
+  useEffect(() => {
+    const clonedRows = [...props.rows];
+
+    const formattedRows = clonedRows.map((row: any) => {
+      console.log(row);
+      return {
+        ...row,
+        createdAt: formatDateString(row.createdAt),
+      };
+    });
+
+    setFormattedRows(formattedRows);
+  }, [props.rows]);
+
+  const formatDateString = (dateString: string): string => {
+    const dateObject = new Date(dateString);
+
+    const formattedDate = dateObject.toLocaleDateString();
+    return formattedDate;
+  };
 
   const handleDelete = (id: string) => {
     if (!id) return;
@@ -38,7 +72,7 @@ const DataTable = (props: Props) => {
 
   const handleEditUser = (id: string) => {
     setIsModalOpen(true);
-    console.log(id, "oi"); // Defina productId aqui
+    console.log(id);
   };
 
   const actionColumn: GridColDef = {
@@ -79,7 +113,7 @@ const DataTable = (props: Props) => {
     <div className="dataTable">
       <DataGrid
         className="dataGrid"
-        rows={props.rows}
+        rows={formattedRows}
         columns={[...props.columns, actionColumn]}
         initialState={{
           pagination: {
@@ -95,7 +129,7 @@ const DataTable = (props: Props) => {
             quickFilterProps: { debounceMs: 500 },
           },
         }}
-        pageSizeOptions={[5]}
+        pageSizeOptions={[10]}
         checkboxSelection
         disableRowSelectionOnClick
         disableColumnFilter
