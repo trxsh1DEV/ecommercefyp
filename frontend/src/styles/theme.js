@@ -23,13 +23,13 @@ export const theme = {
   fonts: {
     family: {
       default: "'Urbanist', sans-serif",
-      secondary: "'Open Sans', -apple-system",
+      secondary: "'Open Sans'",
     },
     sizes: {
-      xsmall: '8rem',
+      xsmall: '1.4rem',
       small: '1.6rem',
-      medium: '2.4rem',
-      large: '3.2rem',
+      medium: '2.2rem',
+      large: '2.8rem',
       xlarge: '4.0rem',
       xxlarge: '4.8rem',
       huge: '5.6rem',
@@ -56,6 +56,7 @@ export const mobile = (props) => {
   return css`
     @media only screen and (max-width: 770px) {
       ${props}
+      /* object-fit: contain; */
     }
   `;
 };

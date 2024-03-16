@@ -1,4 +1,4 @@
-import Newsletter from '../Newsletter/Newsletter';
+// import Newsletter from '../Newsletter/Newsletter';
 import {
   Container,
   Center,
@@ -27,7 +27,7 @@ import {
 const Footer = () => {
   return (
     <>
-      <Newsletter />
+      {/* <Newsletter /> */}
       <Container>
         <Left>
           <Logo>FYP STORE</Logo>

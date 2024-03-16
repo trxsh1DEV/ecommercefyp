@@ -6,7 +6,8 @@ export const Navbar = styled.div`
   ${({ theme }) => css`
     height: ${theme.spacings.huge};
     background-color: ${theme.colors.darkColorLight};
-    ${mobile({ height: theme.spacings.xxlarge })}
+    ${mobile({ height: theme.spacings.xxlarge })};
+    overflow: hidden;
   `}
 `;
 

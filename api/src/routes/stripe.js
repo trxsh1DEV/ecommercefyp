@@ -4,6 +4,6 @@ import loginRequired from '../middlewares/loginRequired';
 
 const router = new Router();
 
-router.post('/', loginRequired, stripeController.index);
+router.post('/', stripeController.index);
 
 export default router;
