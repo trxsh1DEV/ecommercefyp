@@ -8,19 +8,54 @@ export const Container = styled.div``;
 export const Wrapper = styled.div`
   padding: 50px;
   display: flex;
+  align-items: flex-start;
+  justify-content: center;
   ${mobile({ padding: '10px', flexDirection: 'column' })}
   overflow: hidden;
 `;
 
 export const ImgContainer = styled.div`
-  flex: 1;
+  display: flex;
+  max-height: 50rem;
+  align-items: center;
+  justify-content: center;
+  background-color: #555;
+  /* margin-left: 3rem; */
+  border-radius: 10px;
+`;
+
+export const WrapperImages = styled.div`
+  /* max-width: 80px; */
+`;
+
+export const containerImages = styled.div`
+  /* width: fit-content; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 2.8rem;
+
+  &:last-child{
+    margin-bottom: 0;
+  }
+`;
+
+export const ImagesMininal = styled.img`
+/* background-color: red; */
+    width: 200%;
+    max-width: 130px;
+    margin-right: 3rem;
+    border-radius: 8px;
+    cursor: pointer;
 `;
 
 export const Image = styled.img`
   width: 100%;
-  max-width: 70rem;
-  min-width: 35rem;
-  height: fit-content;
+  max-width: 60rem;
+  /* height: fit-content; */
+  min-height: 40rem;
+  min-width: 300px;
+  max-height: 44.7rem;
   object-fit: cover;
   ${mobile({
     height: '50rem',
@@ -48,9 +83,9 @@ export const Desc = styled.p`
 
 export const Price = styled.div`
   font-weight: 500;
-  font-size: 40px;
+  font-size: 4rem;
   color: ${theme.colors.lilas};
-  margin-bottom: 0.5rem;
+  margin-bottom: 2rem;
 `;
 
 export const PriceFull = styled.div`
@@ -63,10 +98,70 @@ export const PriceFull = styled.div`
 
 export const Brand = styled.div`
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  /* width: 80%; */
-  margin-top: 1.5rem;
+  margin-top: 2rem;
+  gap: 2rem;
+`;
+
+export const PromotionalField = styled.article`
+  position: absolute;
+  width: 40rem;
+  box-shadow: 0px 0px 22px 0px rgba(255,247,255,1);
+  height: 17rem;
+  background-color: #333;
+  padding: 1rem;
+  border-radius: 8px;
+  right: 3%;
+
+  @media only screen and (max-width: 1700px) {
+      /* right: 12%; */
+      width: 27rem;
+    }
+    @media only screen and (max-width: 1560px) {
+      left: 20%;
+      width: 40rem;
+      height: 15rem;
+      bottom: 20vh;
+    }
+    @media only screen and (max-width: 1300px) {
+      left: 20%;
+      width: 30rem;
+      height: 15rem;
+      bottom: 20vh;
+    }
+    @media only screen and (max-width: 1300px) {
+      left: 18%;
+      width: 27rem;
+      height: 15rem;
+      bottom: 25vh;
+    }
+`;
+
+export const ContentPromotional = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 1rem;
+`;
+
+export const ClockContainer = styled.div`
+  display: flex;
+`;
+
+export const Digit = styled.div`
+  border: 2px solid ${theme.colors.lightPurple};
+  width: 55px;
+  text-align: center;
+  font-size: 2.5rem;
+  padding: 0.5rem;
+  margin: 0.2rem;
+`;
+
+export const BrandContent = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
 `;
 
 export const SpanCustom = styled.span`
@@ -77,9 +172,18 @@ export const SpanCustom = styled.span`
 export const FreteCalculate = styled.div`
   display: flex;
   justify-content: center;
+  align-items: center;
+`;
+
+export const ContentFrete = styled.span`
+display: flex;
+align-items: center;
+justify-content: center;
   gap: 1rem;
+  margin-top: 2rem;
   text-align: center;
   font-family: ${theme.fonts.family.secondary};
+  cursor: pointer;
 `;
 
 export const StyledRating = styled(Rating)({
@@ -92,6 +196,15 @@ export const StyledRating = styled(Rating)({
   '& .MuiSvgIcon-fontSizeInherit': {
     width: '3rem',
     height: '3rem',
+  },
+});
+
+export const StyledRatingComment = styled(Rating)({
+  '& .MuiRating-icon': {
+    color: `${theme.colors.lilas}`,
+  },
+  '& .MuiRating-iconHover': {
+    color: `${theme.colors.lilas}`,
   },
 });
 
@@ -205,6 +318,55 @@ export const ContainerCEP = styled.aside`
 
 export const NavLinkCustom = styled(NavLink)`
   color: ${theme.colors.lightPurple};
+`;
+export const SectionSale = styled.article`
+  background-color: red;
+  gap: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+`;
+
+export const ContainerSale = styled.article`
+  display: flex;
+  justify-content: center;
+`;
+
+export const ItemsSale = styled.article`
+  width: 100px;
+  min-height: 5rem;
+  text-align: center;
+  padding: 0.3rem;
+`;
+
+export const CommentContainer = styled.section`
+  margin: 20px auto auto auto;
+  max-width: 600px;
+  /* text-align: center; */
+`;
+
+export const Comment = styled.div`
+  border-bottom: 1px solid #ccc;
+  padding: 1rem;
+  box-shadow: 0px 0px 15px 19px rgba(0,0,0,0.1);
+  margin-bottom: 2rem;
+`;
+
+export const UserInfo = styled.div`
+  font-weight: bold;
+`;
+
+export const Date = styled.div`
+  font-size: 12px;
+  color: #666;
+`;
+
+export const RatingComment = styled.div`
+  margin-top: 5px;
+`;
+
+export const Description = styled.div`
+  margin-top: 5px;
 `;
 
 export const SectionsProducts = styled.section`

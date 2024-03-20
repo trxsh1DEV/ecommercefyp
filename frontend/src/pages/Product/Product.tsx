@@ -1,10 +1,9 @@
-import { LocationOn, ExpandMoreSharp } from '@mui/icons-material';
+import { LocationOn, ExpandMoreSharp, CheckCircle } from '@mui/icons-material';
 import * as Styled from './styles';
 import Footer from '../../Components/Footer/Footer';
 import Navbar from '../../Components/Navbar/Navbar';
-import { Announcement } from '../../Components/Announcement/Announcement';
-import { useLocation, NavLink } from 'react-router-dom';
-import React, { useCallback, useEffect, useState } from 'react';
+import { useLocation } from 'react-router-dom';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { userRequest } from '../../utils/requestMethods';
 import { addProduct } from '../../redux/cart';
@@ -16,6 +15,8 @@ import axios from 'axios';
 import { zipCodeMask } from '../../utils/regex';
 import { InputText } from '../../styles/render-theme';
 import { Accordion, AccordionDetails, AccordionSummary } from '@mui/material';
+import { comments, images } from './mock';
+import { Heading1, Heading2 } from '../../styles/theme';
 
 interface ProductProps {}
 
@@ -30,8 +31,10 @@ const CepSchema = z.object({
 const Product: React.FC<ProductProps> = () => {
   const location = useLocation();
   const id = location.pathname.split('/')[2];
+  const quantity = 1;
   const [product, setProduct] = useState<any>({});
   const [showModal, setShowModal] = useState<boolean>(false);
+  const mainImageRef = useRef<HTMLImageElement>(null);
 
   const {
     register,
@@ -40,7 +43,7 @@ const Product: React.FC<ProductProps> = () => {
     watch,
     formState: { errors },
   } = useForm<FormData>({
-    mode: 'all',
+    mode: 'onBlur',
     criteriaMode: 'all',
     resolver: zodResolver(CepSchema),
     defaultValues: {
@@ -51,7 +54,6 @@ const Product: React.FC<ProductProps> = () => {
   const zipCode = watch('cep');
 
   const handleFetchAddress = useCallback(async (zipCode: string) => {
-    console.log(zipCode);
     const { data } = await axios.get(
       `https://viacep.com.br/ws/${zipCode}/json/`,
     );
@@ -83,47 +85,110 @@ const Product: React.FC<ProductProps> = () => {
   }, [id]);
 
   const handleClick = () => {
-    dispatch(addProduct({ ...product }));
+    dispatch(addProduct({ ...product, quantity }));
   };
 
   function onSubmit(data: FormData) {
     console.log(data);
   }
 
+  const handleImageClick = (imageUrl: string) => {
+    if (mainImageRef.current) {
+      mainImageRef.current.src = imageUrl;
+    }
+  };
+
+  const formatDigit = (digit) => {
+    return digit < 10 ? '0' + digit : digit;
+  };
+
   return (
     <Styled.Container>
       <Navbar />
-      <Announcement />
       <Styled.Wrapper>
+        <Styled.WrapperImages>
+          {product.image &&
+            images.map((image: string, index: number) => (
+              <Styled.containerImages
+                key={index}
+                onClick={() => handleImageClick(image)}
+              >
+                <Styled.ImagesMininal src={image}></Styled.ImagesMininal>
+              </Styled.containerImages>
+            ))}
+        </Styled.WrapperImages>
         <Styled.ImgContainer>
-          <Styled.Image src={product.image} />
+          <Styled.Image ref={mainImageRef} src={product.image} />
         </Styled.ImgContainer>
         <Styled.InfoContainer>
-          <Styled.Title>{product.title}</Styled.Title>
+          <Styled.Title>{product.title} asdasassdasssssss</Styled.Title>
           <Styled.Brand>
             Fabricante: SZMZ
             <Styled.StyledRating name={'ratingProduct'} readOnly />
           </Styled.Brand>
+          <Styled.PromotionalField>
+            <Styled.ContentPromotional>
+              <Heading1>Promoção Relâmpago</Heading1>
+
+              <Styled.ClockContainer>
+                <Styled.Digit>
+                  {formatDigit(new Date().getHours())}
+                </Styled.Digit>
+                <Styled.Digit>
+                  {formatDigit(new Date().getMinutes())}
+                </Styled.Digit>
+                <Styled.Digit>
+                  {formatDigit(new Date().getSeconds())}
+                </Styled.Digit>
+              </Styled.ClockContainer>
+              <Heading2>R$ 59,90</Heading2>
+            </Styled.ContentPromotional>
+          </Styled.PromotionalField>
           <Styled.Brand>
-            Disponível em estoque <b>Veja produtos similares</b>
+            <Styled.BrandContent>
+              Disponível em estoque
+              <CheckCircle fontSize="large" color="success" />
+            </Styled.BrandContent>
+            <b>Produtos similares</b>
           </Styled.Brand>
           <Styled.PriceFull>R$ {product.price * 1.3}</Styled.PriceFull>
           <Styled.Price>
-            R$ {product.price} <span>À vista no pix</span>
+            R$ {product.price}{' '}
+            <span>
+              À vista no pix (<b>15%</b> off)
+            </span>
           </Styled.Price>
           <Styled.SpanCustom>
-            Mais detalhes sobre outras formas de pagamento
+            <div>
+              Em até 2x de <b>R$ {product.price * 1.3}</b> sem juros no cartão
+            </div>
+            <div style={{ margin: '0.3rem 0 1.5rem 0' }}>
+              Ou em 1x no cartão com até <b>10%</b> OFF
+            </div>
+            <span style={{ textDecoration: 'underline', cursor: 'pointer' }}>
+              Mais detalhes sobre outras formas de pagamento
+            </span>
           </Styled.SpanCustom>
+
           <Styled.AddContainer>
             <Styled.Button onClick={handleClick}>COMPRAR AGORA</Styled.Button>
             <Styled.Button onClick={handleClick}>ADD TO CART</Styled.Button>
           </Styled.AddContainer>
-
-          <Styled.FreteCalculate onClick={() => setShowModal(true)}>
-            <LocationOn fontSize="large" />
-            Calcular frete e prazo
+          {/* <Styled.ContainerSale>
+            <Styled.SectionSale>
+              <Styled.ItemsSale>25%</Styled.ItemsSale>
+              <Styled.ItemsSale>17</Styled.ItemsSale>
+              <Styled.ItemsSale>3</Styled.ItemsSale>
+            </Styled.SectionSale>
+          </Styled.ContainerSale> */}
+          <Styled.FreteCalculate>
+            <Styled.ContentFrete onClick={() => setShowModal(true)}>
+              <LocationOn fontSize="large" />
+              Calcular frete e prazo
+            </Styled.ContentFrete>
           </Styled.FreteCalculate>
         </Styled.InfoContainer>
+
         {showModal && (
           <Modal onClose={() => setShowModal(false)}>
             <Styled.ModalContent>
@@ -145,11 +210,9 @@ const Product: React.FC<ProductProps> = () => {
                   {...register('cep')}
                   placeholder="CEP"
                   maxLength={9}
-                  // autoFocus={true}
+                  autoFocus={true}
                 />
                 {errors.cep?.message && <p>{errors.cep?.message}</p>}
-
-                {/* <Styled.Button type="submit">Submit</Styled.Button> */}
               </form>
             </Styled.ModalContent>
           </Modal>
@@ -198,6 +261,27 @@ const Product: React.FC<ProductProps> = () => {
             {product.desc}
           </AccordionDetails>
         </Accordion>
+      </Styled.InfoContainer>
+      <Styled.InfoContainer>
+        <Styled.CommentContainer>
+          <h2 style={{ textAlign: 'center' }}>Customer Reviews</h2>
+          {comments.map((comment, index) => (
+            <Styled.Comment key={index}>
+              <Styled.UserInfo>{comment.user}</Styled.UserInfo>
+              <Styled.Date>Purchased on: {comment.date}</Styled.Date>
+              <Styled.RatingComment>
+                <Styled.StyledRatingComment
+                  name={'ratingProduct'}
+                  readOnly
+                  value={comment.rating}
+                  size="small"
+                />
+              </Styled.RatingComment>
+              <Styled.Description>{comment.description}</Styled.Description>
+            </Styled.Comment>
+          ))}
+        </Styled.CommentContainer>
+        <hr />
       </Styled.InfoContainer>
       <Footer />
     </Styled.Container>

@@ -1,4 +1,3 @@
-// import { Announcement } from '../Components/Announcement/Announcement';
 import Categories from '../Components/Categories/Categories';
 import Footer from '../Components/Footer/Footer';
 import MainLinesPc from '../Components/MainLinesPCs';
@@ -24,7 +23,6 @@ const parallaxStyle = {
 const Home = () => {
   return (
     <>
-      {/* <Announcement /> */}
       <Navbar />
       <div style={parallaxStyle}>
         <Slider />

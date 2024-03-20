@@ -1,3 +1,4 @@
+// cart.jsx
 import {
   Bottom,
   Container,
@@ -29,25 +30,43 @@ import {
 } from './styles';
 import Footer from '../../Components/Footer/Footer';
 import Navbar from '../../Components/Navbar/Navbar';
-import { Announcement } from '../../Components/Announcement/Announcement';
 import { Add, Remove } from '@mui/icons-material';
-import { useSelector } from 'react-redux';
-import PayButton from '../../Components/Payments/PayButton';
+import { useSelector, useDispatch } from 'react-redux';
+import {
+  increaseQuantity,
+  decreaseQuantity,
+  clearCart,
+} from '../../redux/cart'; // Verifique o caminho correto
 
 const Cart = () => {
   const cart = useSelector((state) => state.cart);
+  const dispatch = useDispatch();
+  const exampleSubTotal = 5.9;
+  const exampleShipping = 14.9;
+
+  const handleQuantity = (type, productId) => {
+    if (type === 'inc') {
+      dispatch(increaseQuantity(productId));
+    } else {
+      dispatch(decreaseQuantity(productId));
+    }
+  };
+
+  const handleClearCart = () => {
+    dispatch(clearCart());
+  };
 
   return (
     <Container>
       <Navbar />
-      <Announcement />
       <Wrapper>
         <Title>YOUR BAG</Title>
         <Top>
           <TopButton>CONTINUE SHOPPING</TopButton>
           <TopTexts>
-            <TopText>Shopping Bag (2)</TopText>
-            <TopText>Your Wishlist (0)</TopText>
+            <TopText>Shopping Bag ({cart.quantity})</TopText>
+            {/* <TopText>Your Wishlist (0)</TopText> */}
+            <TopText onClick={() => handleClearCart()}>Limpar carrinho</TopText>
           </TopTexts>
           <TopButton type="filled">CHECKOUT NOW</TopButton>
         </Top>
@@ -72,12 +91,18 @@ const Cart = () => {
                 </ProductDetail>
                 <PriceDetail>
                   <ProductAmountContainer>
-                    <Add />
+                    <Add
+                      style={{ cursor: 'pointer' }}
+                      onClick={() => handleQuantity('inc', prod._id)}
+                    />
                     <ProductAmount>{prod.quantity}</ProductAmount>
-                    <Remove />
+                    <Remove
+                      style={{ cursor: 'pointer' }}
+                      onClick={() => handleQuantity('dec', prod._id)}
+                    />
                   </ProductAmountContainer>
                   <ProductPrice>
-                    $ {(prod.price * prod.quantity).toFixed(2)}
+                    {(prod.price * prod.quantity).toFixed(2)}
                   </ProductPrice>
                 </PriceDetail>
               </Product>
@@ -88,21 +113,22 @@ const Cart = () => {
             <SummaryTitle>ORDER SUMMARY</SummaryTitle>
             <SummaryItem>
               <SummaryItemText>Subtotal</SummaryItemText>
-              <SummaryItemPrice>$ {cart.total}</SummaryItemPrice>
+              <SummaryItemPrice>
+                $ {(cart.total - exampleSubTotal).toFixed(2)}
+              </SummaryItemPrice>
             </SummaryItem>
             <SummaryItem>
               <SummaryItemText>Estimated Shipping (example)</SummaryItemText>
-              <SummaryItemPrice>$ 5.90</SummaryItemPrice>
+              <SummaryItemPrice>$ {exampleShipping}</SummaryItemPrice>
             </SummaryItem>
             <SummaryItem>
               <SummaryItemText>Shipping Discount (example)</SummaryItemText>
-              <SummaryItemPrice>$ -5.90</SummaryItemPrice>
+              <SummaryItemPrice>$ -{exampleSubTotal}</SummaryItemPrice>
             </SummaryItem>
             <SummaryItem type="total">
               <SummaryItemText>Total</SummaryItemText>
-              <SummaryItemPrice>$ {cart.total}</SummaryItemPrice>
+              <SummaryItemPrice>$ {cart.total.toFixed(2)}</SummaryItemPrice>
             </SummaryItem>
-            <PayButton cartItens={cart} />
           </Summary>
         </Bottom>
       </Wrapper>

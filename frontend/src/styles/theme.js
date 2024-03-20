@@ -1,4 +1,4 @@
-import { css } from 'styled-components';
+import { css, styled } from 'styled-components';
 
 export const theme = {
   colors: {
@@ -28,7 +28,8 @@ export const theme = {
     sizes: {
       xsmall: '1.4rem',
       small: '1.6rem',
-      medium: '2.2rem',
+      xmedium: '2.2rem',
+      medium: '2.4rem',
       large: '2.8rem',
       xlarge: '4.0rem',
       xxlarge: '4.8rem',
@@ -40,7 +41,7 @@ export const theme = {
   spacings: {
     xsmall: '8rem',
     small: '1.6rem',
-    medium: '2.4rem',
+    medium: '2.2rem',
     large: '3.2rem',
     xlarge: '4.0rem',
     xxlarge: '4.8rem',
@@ -55,6 +56,23 @@ export const theme = {
 export const mobile = (props) => {
   return css`
     @media only screen and (max-width: 770px) {
+      ${props}
+      /* object-fit: contain; */
+    }
+  `;
+};
+
+export const Heading1 = styled.h1`
+  font-size: ${theme.fonts.sizes.xmedium};
+`;
+
+export const Heading2 = styled.h2`
+  font-size: ${theme.fonts.sizes.large};
+`;
+
+export const mediaQuery = (props, width) => {
+  return css`
+    @media only screen and (max-width: ${width}) {
       ${props}
       /* object-fit: contain; */
     }

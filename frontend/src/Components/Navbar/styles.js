@@ -32,8 +32,7 @@ export const Item = styled.div`
     left: 50%;
     width: 0;
     height: 0.2rem;
-    background: ${({ theme }) =>
-      theme.colors.primaryPurple}; /* Defina a cor desejada */
+    background: ${({ theme }) => theme.colors.primaryPurple};
     transition: all 300ms ease-in-out;
     transform: translateX(-50%);
     color: red;
